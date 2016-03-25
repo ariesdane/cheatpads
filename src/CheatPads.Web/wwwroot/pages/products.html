@@ -1,0 +1,15 @@
+﻿<div class="row" data-bind="foreach: products">
+    <div class="col-sm-4">
+        <div class="thumbnail">
+            <h5 data-bind="text: title"></h5>
+            <img data-bind="attr: { src: img}">
+            <div class="caption">
+                <h5 data-bind="text-title"></h5>
+                <div class="clearfix">
+                    <span class="pull-left text-primary" data-bind="text: price"></span>
+                    <button class="btn pull-right" data-bind="click: $parent.addToCart">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿<div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="well">
+                <h2>Welcome to CheatPads.com</h2>
+                <br />
+                <p>
+                    CheatPads.com is the world's #1 provider of technology related mousepads for your every need. Make your coworkers envious... order today!
+                </p>
+                <div class="clearfix">
+                    <button class="btn btn-primary btn-lg pull-right" data-bind="click: shop">Shop</button>
+                </div>
+   
+            </div> 
+            <div class="well">
+                <h4>Inner child calling? Check out our Animation collection!</h4>
+                <hr />
+                <div class="row" data-bind="foreach: anime">       
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <h5 data-bind="text: title"></h5>
+                            <img data-bind="attr: { src: img}">
+                            <div class="caption">
+                                <h3 data-bind="text-title"></h3>
+                                <div class="clearfix">
+                                    <span class="pull-left text-primary" data-bind="text: price"></span>
+                                    <button class="btn pull-right" data-bind="click: $parent.addToCart">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="well">
+                <h4>Popular Now</h4>
+                <div class="row" data-bind="foreach: popular">
+                    <div class="col-sm-12">
+                        <div class="thumbnail">
+                            <h5 data-bind="text: title"></h5>
+                            <img data-bind="attr: { src: img}">
+                            <div class="caption">
+                                <h6 data-bind="text-title"></h6>
+                                <div class="clearfix">
+                                    <span class="pull-left text-primary" data-bind="text: price"></span>
+                                    <button class="btn pull-right" data-bind="click: $parent.addToCart">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

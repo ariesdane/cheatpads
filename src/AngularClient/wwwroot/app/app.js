@@ -12,7 +12,7 @@
                 controller: "AuthorizedController"
             })
 		        .state("home", { abstract: true, url: "/home", templateUrl: "/templates/home.html" })
-                  
+
 		        .state("overview", {
 		            abstract: true,
 		            parent: "home",
@@ -28,12 +28,12 @@
 		                UserEventsService: "UserEventsService",
 
 		                userEvents: [
-		                    "UserEventsService", function(UserEventsService) {
+		                    "UserEventsService", function (UserEventsService) {
 		                        return UserEventsService.GetUserEvents();
 		                    }
 		                ],
 		                userEvent: [
-		                    "UserEventsService", "$stateParams", function(UserEventsService, $stateParams) {
+		                    "UserEventsService", "$stateParams", function (UserEventsService, $stateParams) {
 		                        var id = $stateParams.id;
 		                        console.log($stateParams.id);
 		                        return UserEventsService.GetUserEvent({ id: id });
@@ -50,7 +50,7 @@
                         UserEventsService: "UserEventsService",
 
                         userEvents: [
-		                    "UserEventsService", function(UserEventsService) {
+		                    "UserEventsService", function (UserEventsService) {
 		                        return UserEventsService.GetUserEvents();
 		                    }
                         ]
@@ -63,18 +63,33 @@
 		            controller: "UserEventsController",
 		            resolve: {
 		                userEvents: [
-		                    "UserEventsService", function(UserEventsService) {
+		                    "UserEventsService", function (UserEventsService) {
 		                        return UserEventsService.GetUserEvents();
 		                    }
 		                ],
 		                userEvent: [
-		                    function() {
+		                    function () {
 		                        return { Id: "", Name: "", Description: "", Timestamp: "2015-08-28T09:57:32.4669632" };
 		                    }
 		                ]
 
 		            }
-		        });
+		        })
+                // USER DOCUMENTS
+                .state("documentindex", {
+                    parent: "overview",
+                    url: "/documentindex",
+                    templateUrl: "/templates/documentindex.html",
+                    controller: "UserDocumentIndexController",
+                    resolve: {
+                        UserEventsService: "UserDocumentsService",
+                        userDocuments: [
+		                    "UserDocumentsService", function (UserDocumentsService) {
+		                        return UserDocumentsService.GetUserDocuments();
+		                    }
+                        ]
+                    }
+                });
 
 		    $locationProvider.html5Mode(true);
 		}

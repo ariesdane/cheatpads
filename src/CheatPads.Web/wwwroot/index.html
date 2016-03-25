@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CheatPads</title>
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/cheatpads.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="toast-anchor"></div>
+        <header>
+            <div class="clearfix">
+                <compose class="pull-left" path="layouts/parts/head"></compose>
+                <div class="pull-right">
+                    <compose path="layouts/parts/cart"></compose>
+                </div>
+            </div>       
+            <compose path="layouts/parts/nav"></compose>
+        </header>
+        <div class="page-host"></div>
+        <compose path="layouts/parts/foot"></compose>
+    </div>
+    <script src="lib/requirejs/require.js" data-main="index"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿<div class="col-xs-6">
+    <div class="panel panel-primary" style="width: 600px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{message}} <a ui-sref="create">Create</a></h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Path</th>
+                        <th>Ext</th>
+                        <th>Size</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height:20px;" ng-repeat="userDocument in userDocuments">
+                        <td><a href="/home/overview/details/{{userDocument.Id}}">{{userDocument.Name}}</a></td>
+                        <td>{{userDocument.Type}}</td>
+                        <td>{{userDocument.Path}}</td>
+                        <td>{{userDocument.Extension}}</td>
+                        <td>{{userDocument.Size}}</td>
+                        <td><button ng-click="Delete(userDocument.Id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

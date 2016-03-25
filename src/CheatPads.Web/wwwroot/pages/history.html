@@ -1,0 +1,27 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">
+            Log Data
+        </span>
+    </div>
+    <ul class="list-group scroll" data-bind="foreach: entries">
+        <li class="list-group-item clearfix">
+            <span style="font-size: 120%">
+                <i data-bind="attr: { class: $parent.getIconClass(type) }"></i>
+            </span>
+            <span data-bind="text: $parent.formatDate(timestamp)"></span> &nbsp;&nbsp;
+            <span data-bind="text: message"></span> &nbsp;&nbsp;
+            <code class="pull-right" data-bind="text: JSON.stringify(data), visible: data"></code>
+        </li>
+    </ul>
+    <div class="panel-footer">
+        <em>
+            Total: <!-- ko text: entries().length--><!--/ko-->
+            Entries
+        </em>
+    </div>
+</div>
+
+<div class="btn-group btn-group-justified" data-bind="foreach: buttons">
+    <button class="btn" data-bind="text: name, click: $parent.testLog"></button>
+</div>
