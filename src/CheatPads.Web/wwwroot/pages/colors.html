@@ -1,0 +1,15 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="panel-title">Colors</span>
+    </div>
+    <ul class="list-group" data-bind="foreach: colors">
+        <li class="list-group-item">
+            <span class="list-group-item-heading text-primary" data-bind="text: Id"></span> &nbsp;
+            <span class="badge" data-bind="style: { 'background-color': Hex }">&nbsp;</span> &nbsp;
+            <!--ko text: Name--><!--/ko-->
+        </li>
+    </ul>
+    <div class="panel-footer">
+        <code></code>
+    </div>
+</div>
