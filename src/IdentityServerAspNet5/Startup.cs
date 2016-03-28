@@ -32,6 +32,7 @@ namespace IdentityServerAspNet5
             var builder = services.AddIdentityServer(options =>
             {
                 options.SigningCertificate = cert;
+                options.RequireSsl = false;
             });
 
             builder.AddInMemoryClients(Clients.Get());
@@ -45,6 +46,7 @@ namespace IdentityServerAspNet5
                 {
                     razor.ViewLocationExpanders.Add(new CustomViewLocationExpander());
                 });
+
             services.AddTransient<LoginService>();
         }
 

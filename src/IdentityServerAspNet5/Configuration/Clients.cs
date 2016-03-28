@@ -9,7 +9,8 @@
         public static List<Client> Get()
         {
             return new List<Client>
-            {new Client
+            {
+                new Client
                 {
                     ClientName = "angularclient",
                     ClientId = "angularclient",
@@ -34,6 +35,29 @@
                     },
                     RequireConsent = false
 
+                },
+                new Client
+                {
+                    ClientName = "CheatPads.com",
+                    ClientId = "CheatPads.Web",
+                    Flow = Flows.Implicit,
+                    RedirectUris = new List<string>
+                    {
+                        "http://localhost:61739/",
+                        "https://localhost:44327/"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "http://localhost:61739/",
+                        "https://localhost:44327/"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "email",
+                        "profile",
+                        "userEvents"
+                    }
                 },
                 new Client
                 {

@@ -2,8 +2,14 @@
     startPage: "#home",
     pageHost: ".page-host",
     api: {
-        resBaseUrl: "https://localhost:44390/api",
-        authBaseUrl: "https://localhost:44345/"
+        apiUrl: "https://localhost:44390/api",
+    },
+    auth: {
+        loginUrl: "https://localhost:44345/connect/authorize",
+        //returnUrl: "https://localhost:44327/",
+        returnUrl: "http://localhost:61739/",
+        clientId: "CheatPads.Web",
+        responseType: "token"
     },
     routes: [
         { hash: "#home", title: 'Home', path: 'pages/home', icon: "home" },

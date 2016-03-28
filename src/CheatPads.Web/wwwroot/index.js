@@ -5,7 +5,9 @@
         'text': 'lib/requirejs-text/text',
         'system': 'app/system',
         'config': 'app/config',
-        'ajax': 'app/ajax'
+        'storage': 'app/storage',
+        'ajax': 'app/ajax',
+        'auth': 'app/auth'
     },
     shim: {
         'jquery': { exports: 'jQuery' }
@@ -13,7 +15,7 @@
     urlArgs: +new Date
 });
 
-define(["ko", "system", "ajax", "config"], function (ko, system, ajax, config) {
+define(["ko", "system", "storage", "ajax", "auth", "config"], function (ko, system, storage, ajax, auth, config) {
     // configure application
     system
         .initRouting({
@@ -24,9 +26,14 @@ define(["ko", "system", "ajax", "config"], function (ko, system, ajax, config) {
         .initWidgets(config.widgets)
         .log("Bootstrap Ok");
  
+    // inititialize authentication
+    auth.init();
+
     // ajax interceptors for logging & security
     ajax.interceptors.push({
         request: function (options) {
+            auth.header();
+
             system.info("Ajax Request", options);
         },
         success: function (data) {
@@ -34,9 +41,13 @@ define(["ko", "system", "ajax", "config"], function (ko, system, ajax, config) {
         },
         error: function (xhr, status, message) {
             system.error("Ajax Error", { status: status, message: message });
+        },
+        401: function () {
+            auth.login();
         }
     })
 
+   
     // must call apply bindings for ko to bind widgets 
     ko.applyBindings({});
     system.log("Bindings Ok");

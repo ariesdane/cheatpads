@@ -46,7 +46,7 @@
         }
 
         options.error = function (xhr, status, error) {
-            applyInterceptors(["response", "error", status], arguments);
+            applyInterceptors(["response", "error", xhr.status], arguments);
             error_fn && error_fn.apply(options.context, arguments);
         };
 

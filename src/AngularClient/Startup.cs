@@ -17,18 +17,18 @@ namespace AspNet5SQLite
         public void ConfigureServices(IServiceCollection services)
         {
             //Add Cors support to the service
-            services.AddCors();
+            //services.AddCors();
 
-            var policy = new Microsoft.AspNet.Cors.Infrastructure.CorsPolicy();
+            //var policy = new Microsoft.AspNet.Cors.Infrastructure.CorsPolicy();
 
-            policy.Headers.Add("*");
-            policy.Methods.Add("*");
-            policy.Origins.Add("*");
-            policy.SupportsCredentials = true;
+            //policy.Headers.Add("*");
+            //policy.Methods.Add("*");
+            //policy.Origins.Add("*");
+            //policy.SupportsCredentials = true;
+            //
+            //services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
 
-            services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
-
-            services.AddMvc();
+            //services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -39,17 +39,17 @@ namespace AspNet5SQLite
 
             app.UseIISPlatformHandler();
 
-            app.UseExceptionHandler("/Home/Error");
+            //app.UseExceptionHandler("/Home/Error");
 
-            app.UseCors("corsGlobalPolicy");
+            //app.UseCors("corsGlobalPolicy");
 
             app.UseStaticFiles();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+           // app.UseMvc(routes =>
+           // {
+           //     routes.MapRoute(
+           //         name: "default",
+           //         template: "{controller=Home}/{action=Index}/{id?}");
+           // });
         }
 
         // Entry point for the application.
