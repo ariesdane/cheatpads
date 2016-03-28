@@ -47,6 +47,8 @@ define(["ko", "system", "storage", "ajax", "auth", "config"], function (ko, syst
         }
     })
 
+    // api root
+    ajax.setBaseUrl(config.api.baseUrl);
    
     // must call apply bindings for ko to bind widgets 
     ko.applyBindings({});

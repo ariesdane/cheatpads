@@ -30,7 +30,7 @@
                         "openid",
                         "email",
                         "profile",
-                        "userEvents"
+                        "CheatPads.Api"
                     }
                 },
                 new Client
@@ -51,7 +51,7 @@
                         "openid",
                         "email",
                         "profile",
-                        "userEvents"
+                        "CheatPads.Api"
                     }
                 }
             };

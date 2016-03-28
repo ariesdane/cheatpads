@@ -12,6 +12,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 
 using CheatPads.Api.Model;
 using CheatPads.Api.Repositories;
+using CheatPads.Data;
 
 namespace CheatPads.Api
 {
@@ -30,11 +31,17 @@ namespace CheatPads.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration["Production:SqliteConnectionString"];
+            var connection = Configuration["Data:Development:SqliteConnectionString"];
 
             services.AddEntityFramework()
                 .AddSqlite()
                 .AddDbContext<ResourceContext>(options => options.UseSqlite(connection));
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<DataContext>(options => {
+                    options.UseSqlServer(Configuration["Data:Development:SqlServerConnectionString"]);
+                });
 
             //Add Cors support to the service
             services.AddCors();
@@ -60,11 +67,8 @@ namespace CheatPads.Api
             loggerFactory.AddDebug();
 
             app.UseIISPlatformHandler();
-
             app.UseExceptionHandler("/Home/Error");
-
             app.UseCors("corsGlobalPolicy");
-
             app.UseStaticFiles();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
@@ -76,7 +80,7 @@ namespace CheatPads.Api
                 options.AutomaticAuthenticate = true;
             });
 
-            app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "userEvents" });
+            app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "CheatPads.Api" });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -1,7 +1,8 @@
 ﻿define(["system", "config", "storage", "jquery", "ko"], function (system, config, storage, $, ko) {
     
-    var _loginUrl = config.auth.loginUrl + "?scope=userEvents&" +
+    var _loginUrl = config.auth.loginUrl + "?" +
             "client_id=" + encodeURI(config.auth.clientId) + "&" +
+            "scope=" + encodeURI(config.auth.scope) + "&" +
             "response_type=" + encodeURI(config.auth.responseType) + "&" +
             "redirect_uri=" + encodeURI(config.auth.returnUrl) + "&" +
             "state=" + encodeURI(+new Date);
@@ -45,7 +46,7 @@
 
         if (accessToken) {          
             _createIdentity(accessToken);
-            system.log("Created User Identity", _identity());
+            system.log("Created User Identity", _identity().userName);
 
             location.href = storage.get("returnUrl");
         }
@@ -53,7 +54,7 @@
             _restoreIdentity();
 
             if (_authenticated()) {
-                system.log("Obtained Cached Identity", _identity());
+                system.log("Obtained Cached Identity", _identity().userName);
             }
         }
     }
@@ -66,7 +67,7 @@
     }
 
     var _logout = function () {
-        system.log("Logout & Removed Identity", _identity());
+        system.log("Logout & Removed Identity", _identity().userName);
 
         _clearIdentity();
     }

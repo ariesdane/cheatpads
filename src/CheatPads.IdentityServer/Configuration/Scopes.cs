@@ -19,8 +19,8 @@
                 // contain roles of user
                 new Scope
                 {
-                    Name = "userEvents",
-                    DisplayName = "User Event Records Scope",
+                    Name = "CheatPads.Api",
+                    DisplayName = "CheatPads API Resource Scope",
                     Type = ScopeType.Resource,
                     IncludeAllClaimsForUser = true,
 

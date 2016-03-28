@@ -1,5 +1,5 @@
 ﻿define(['jquery'], function ($) {
-    var _self,
+    var _baseUrl = "",
         _interceptors = [
             //{
             //    request: fn // intercept all requests
@@ -9,10 +9,11 @@
             //    401: fn      // intercept 401 responses 
             //}
         ];
+        
     
     var _url = function (path, id) {
         if (path.slice(-1) == "/") path = path.slice(0, -1);
-        if (!/http/i.test(path)) path = _self.baseUrl + "/" + path;
+        if (!/http/i.test(path)) path = _baseUrl + "/" + path;
         if (id !== undefined) path += "/" + id;
         return path;
     }
@@ -64,7 +65,7 @@
     };
 
     
-    return _self = {   
+    return {   
         ajax: _ajax,
         get: function (path, id, query) {
             if (typeof id === "object") {
@@ -83,7 +84,10 @@
             return _ajax({ url: _url(path, id), type: "DELETE" });
         },       
         interceptors: _interceptors,
-        baseUrl: "",
+        
+        setBaseUrl: function (baseUrl) {
+            _baseUrl = baseUrl;
+        }
     }
 
 });

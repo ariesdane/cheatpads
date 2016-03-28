@@ -1,5 +1,8 @@
 ﻿{
-    "Production": {
-        "SqliteConnectionString": "Data Source=../dataeventrecords.sqlite"
+  "Data": {
+    "Development": {
+      "SqliteConnectionString": "Data Source=../dataeventrecords.sqlite",
+      "SqlServerConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=CheatPads.Data;Integrated Security=True"
     }
+  }
 }

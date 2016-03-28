@@ -2,12 +2,13 @@
     startPage: "#home",
     pageHost: ".page-host",
     api: {
-        apiUrl: "https://localhost:44390/api",
+        baseUrl: "https://localhost:44390/api",
     },
     auth: {
         loginUrl: "https://localhost:44345/connect/authorize",
         returnUrl: "http://localhost:61739/",
         clientId: "CheatPads.Clients.Web",
+        scope: "CheatPads.Api",
         responseType: "token"
     },
     routes: [
@@ -16,7 +17,8 @@
         { hash: "#about", title: 'About', path: 'pages/about', icon: "info-sign" },
         { hash: "#history", title: 'History', path: 'pages/history', icon: "list" },
         { hash: "#test", title: 'Test', path: 'pages/test', icon: "flash" },
-        { hash: "#colors", title: 'Colors', path: 'pages/colors', icon: "flash" }
+        { hash: "#colors", title: 'Colors', path: 'pages/colors', icon: "flash" },
+        { hash: "#admin/products", title: 'Product Admin', path: 'pages/admin/products', icon: "cog" }
     ],
     widgets: [
         { name: "dropdown", path: "widgets/dropdown" }
