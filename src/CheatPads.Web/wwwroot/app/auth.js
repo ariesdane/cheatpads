@@ -1,4 +1,4 @@
-﻿define(["system", "config", "storage", "jquery"], function (system, config, storage, $) {
+﻿define(["system", "config", "storage", "jquery", "ko"], function (system, config, storage, $, ko) {
     
     var _loginUrl = config.auth.loginUrl + "?scope=userEvents&" +
             "client_id=" + encodeURI(config.auth.clientId) + "&" +
@@ -6,30 +6,55 @@
             "redirect_uri=" + encodeURI(config.auth.returnUrl) + "&" +
             "state=" + encodeURI(+new Date);
     
-    var _identity = {
+    var _identity = ko.observable({
         userName: "",
         accessToken: "",
-    };
+    });
 
-    var _loadIdentity = function (token) {
-        _identity.accessToken = token;
-        _identity.userName = "admin"; // todo: load from api
-        storage.set("identity", _identity);
+    var _authenticated = ko.observable(false);
+
+    var _createIdentity = function (token) {
+        var identity = {
+            accessToken: token,
+            userName: "admin" // todo: load from api
+        };      
+        _identity(identity);
+        _authenticated(true);
+        storage.set("identity", identity);
+    }
+
+    var _clearIdentity = function () {           
+        _identity({
+            accessToken: "",
+            userName: ""
+        });
+        _authenticated(false);
+        storage.remove("identity");
+    }
+
+    var _restoreIdentity = function () {
+        var identity = storage.get("identity");
+        if (identity) {
+            _identity(identity);
+            _authenticated(_identity.accessToken !== undefined);
+        }   
     }
 
     var _initialize = function () {
         var accessToken = _getQueryParam("access_token");
 
-        _identity = storage.get("identity");
+        if (accessToken) {          
+            _createIdentity(accessToken);
+            system.log("Created User Identity", _identity());
 
-        if (accessToken) {
-            system.log("Obtained Access Token", accessToken);
-
-            _loadIdentity(accessToken);
-            system.navigate(storage.get("returnUrl"));
+            location.href = storage.get("returnUrl");
         }
-        else if(_identity && _identity.accessToken){
-            system.log("Access Token Exists", _identity.accessToken);
+        else {
+            _restoreIdentity();
+
+            if (_authenticated()) {
+                system.log("Obtained Cached Identity", _identity());
+            }
         }
     }
 
@@ -40,11 +65,17 @@
         location.href = _loginUrl;
     }
 
+    var _logout = function () {
+        system.log("Logout & Removed Identity", _identity());
+
+        _clearIdentity();
+    }
+
     var _header = function () {
-        if (_identity && _identity.accessToken) {
+        if (_authenticated()) {
             $.ajaxSetup({
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + _identity.accessToken);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + _identity().accessToken);
                 }
             });
         }
@@ -58,7 +89,9 @@
 
     return {
         login: _login,
+        logout: _logout,
         header: _header,
+        authenticated: _authenticated,
         identity: _identity,
         init: _initialize
     }

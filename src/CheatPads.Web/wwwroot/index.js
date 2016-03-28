@@ -3,6 +3,7 @@
         'ko': 'lib/knockout/dist/knockout',
         'jquery': 'lib/jquery/dist/jquery',
         'text': 'lib/requirejs-text/text',
+        'base64': 'app/base64',
         'system': 'app/system',
         'config': 'app/config',
         'storage': 'app/storage',
@@ -33,7 +34,6 @@ define(["ko", "system", "storage", "ajax", "auth", "config"], function (ko, syst
     ajax.interceptors.push({
         request: function (options) {
             auth.header();
-
             system.info("Ajax Request", options);
         },
         success: function (data) {

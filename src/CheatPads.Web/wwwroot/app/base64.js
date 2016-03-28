@@ -5,7 +5,7 @@
         var utftext = "";
 
         string = string.replace(/\r\n/g, "\n");
-
+        
         for (var n = 0; n < string.length; n++) {
             var c = string.charCodeAt(n);
 
@@ -21,11 +21,11 @@
                 utftext += String.fromCharCode(((c >> 6) & 63) | 128);
                 utftext += String.fromCharCode((c & 63) | 128);
             }
+
         }
         return utftext;
     }
 
-    // private method for UTF-8 decoding
     var _utf8_decode = function (utftext) {
         var string = "";
         var i = 0;
@@ -54,7 +54,6 @@
     }
 
     return {
-        // public method for encoding
         encode: function (input) {
             var output = "";
             var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
@@ -72,18 +71,16 @@
                 enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
                 enc4 = chr3 & 63;
 
-                isNaN(chr2)
-                    ? enc3 = enc4 = 64
-                    : enc4 = 64;
+                if (isNaN(chr2)) {
+                    enc3 = enc4 = 64;
+                } else if (isNaN(chr3)) {
+                    enc4 = 64;
+                }
 
-                output = output +
-                    _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
-                    _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+                output = output + _keyStr.charAt(enc1) + _keyStr.charAt(enc2) + _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
             }
             return output;
         },
-
-        // public method for decoding
         decode: function (input) {
             var output = "";
             var chr1, chr2, chr3;
@@ -102,10 +99,14 @@
                 chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
                 chr3 = ((enc3 & 3) << 6) | enc4;
 
-                output += String.fromCharCode(chr1);
+                output = output + String.fromCharCode(chr1);
 
-                if (enc3 != 64) output += String.fromCharCode(chr2);
-                if (enc4 != 64) output += String.fromCharCode(chr3);
+                if (enc3 != 64) {
+                    output = output + String.fromCharCode(chr2);
+                }
+                if (enc4 != 64) {
+                    output = output + String.fromCharCode(chr3);
+                }
             }
             return _utf8_decode(output);
         }
