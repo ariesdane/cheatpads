@@ -6,8 +6,11 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.AspNet.Identity;
 
 using CheatPads.IdentityServer.Identity;
+using IdentityServer4.Core.Services;
+using IdentityServer4.Core.Validation;
 
 namespace CheatPads.IdentityServer
 {
@@ -58,6 +61,16 @@ namespace CheatPads.IdentityServer
                 .AddDbContext<IdentityDbContext>(options => {
                     options.UseSqlServer(Configuration["Data:Development:IdentityConnectionString"]);
                 });
+            
+            services.AddTransient<IResourceOwnerPasswordValidator, IdentityResourceOwnerPasswordValidator>();
+            services.AddTransient<IProfileService, IdentityProfileService>();
+            services.AddIdentity<AppUser, AppRole>(options => {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequiredLength = 6;
+                })
+                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddUserManager<IdentityUserManager<AppUser>>()
+                .AddRoleManager<IdentityRoleManager<AppRole>>();
 
 
             // Identity Server UI

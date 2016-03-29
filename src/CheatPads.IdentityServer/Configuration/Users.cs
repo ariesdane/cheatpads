@@ -11,7 +11,7 @@
         public static List<InMemoryUser> Get()
         {
             var users = new List<InMemoryUser>
-            {
+            { /*
                 new InMemoryUser{Subject = "48421155", Username = "Admin", Password = "Admin.1",
                     Claims = new Claim[]
                     {
@@ -54,6 +54,7 @@
                         new Claim(JwtClaimTypes.Role, "Student")
                     }
                 }
+            */
             };
 
             return users;

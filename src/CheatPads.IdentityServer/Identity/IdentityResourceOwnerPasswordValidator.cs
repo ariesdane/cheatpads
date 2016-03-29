@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace CheatPads.IdentityServer.Identity
 {
-    public class AspNetIdentityResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
-    {
-        private readonly UserManager<IdentityUser> _userManager;
+    // http://stackoverflow.com/questions/35304038/identityserver4-register-userservice-and-get-users-from-database-in-asp-net-core/
 
-        public AspNetIdentityResourceOwnerPasswordValidator(UserManager<IdentityUser> userManager)
+    public class IdentityResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
+    {
+        private readonly IdentityUserManager<AppUser> _userManager;
+
+        public IdentityResourceOwnerPasswordValidator(IdentityUserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }

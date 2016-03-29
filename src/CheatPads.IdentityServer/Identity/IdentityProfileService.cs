@@ -14,9 +14,9 @@ namespace CheatPads.IdentityServer.Identity
 {
     public class IdentityProfileService : IProfileService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IdentityUserManager<AppUser> _userManager;
 
-        public IdentityProfileService(UserManager<IdentityUser> userManager)
+        public IdentityProfileService(IdentityUserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
@@ -74,7 +74,7 @@ namespace CheatPads.IdentityServer.Identity
             }
         }
 
-        async private Task<IEnumerable<Claim>> GetClaimsFromUser(IdentityUser user)
+        async private Task<IEnumerable<Claim>> GetClaimsFromUser(AppUser user)
         {
             var claims = new List<Claim>
             {
