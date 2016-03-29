@@ -38,7 +38,9 @@
 
     return {
         get: _getCookie,
-        set: _setCookie,
+        set: function(key, data){
+            _setCookie(key, data, { expires: 1 });
+        },
         remove: _removeCookie
     }
 });
