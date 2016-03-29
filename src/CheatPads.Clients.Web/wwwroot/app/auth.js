@@ -1,4 +1,4 @@
-﻿define(["system", "config", "storage", "jquery", "ko"], function (system, config, storage, $, ko) {
+﻿define(["system", "config", "storage", "base64", "jquery", "ko"], function (system, config, storage, base64, $, ko) {
     
     var _loginUrl = config.auth.loginUrl + "?" +
             "client_id=" + encodeURI(config.auth.clientId) + "&" +
@@ -10,28 +10,38 @@
     var _logoutUrl = config.auth.logoutUrl + "?" +
             "post_logout_redirect_uri=" +  encodeURIComponent(config.auth.logoutUrlReturn);
 
-    var _identity = ko.observable({
-        userName: "",
-        accessToken: "",
-    });
-
-    var _authenticated = ko.observable(false);
+    var _emptyIdentity = {
+            protocol: {},
+            accessToken: "",
+            userName: "",
+            email: "",
+            roles: []
+        },
+        _identity = ko.observable(_emptyIdentity),
+        _authenticated = ko.observable(false);
 
     var _createIdentity = function (token) {
+        var tokenParts = token.split("."),
+            meta = JSON.parse(base64.decode(tokenParts[0])),
+            claims = JSON.parse(base64.decode(tokenParts[1]))
+
         var identity = {
+            meta: meta,
             accessToken: token,
-            userName: "admin" // todo: load from api
+            userName: claims.name,
+            fullName: claims.given_name,
+            email: claims.email,
+            roles: claims.role,
+            issued: claims.auth_time,
+            expires: claims.exp
         };      
         _identity(identity);
         _authenticated(true);
         storage.set("identity", identity);
     }
 
-    var _clearIdentity = function () {           
-        _identity({
-            accessToken: "",
-            userName: ""
-        });
+    var _clearIdentity = function () {
+        _identity(_emptyIdentity);
         _authenticated(false);
         storage.remove("identity");
     }
@@ -47,7 +57,7 @@
     var _initialize = function () {
         var accessToken = _getQueryParam("access_token");
 
-        if (accessToken) {          
+        if (accessToken) {
             _createIdentity(accessToken);
             system.log("Created User Identity", _identity().userName);
 
