@@ -12,7 +12,7 @@
 
     var _emptyIdentity = {
             protocol: {},
-            accessToken: "",
+            token: undefined,
             userName: "",
             email: "",
             roles: []
@@ -27,7 +27,7 @@
 
         var identity = {
             meta: meta,
-            accessToken: token,
+            token: token,
             userName: claims.name,
             fullName: claims.given_name,
             email: claims.email,
@@ -50,7 +50,7 @@
         var identity = storage.get("identity");
         if (identity) {
             _identity(identity);
-            _authenticated(_identity.accessToken !== undefined);
+            _authenticated(identity.token !== undefined);
         }   
     }
 
@@ -67,7 +67,7 @@
             _restoreIdentity();
 
             if (_authenticated()) {
-                system.log("Obtained Cached Identity", _identity().userName);
+                system.log("Restored Cached Identity", _identity().userName);
             }
         }
     }
@@ -90,7 +90,7 @@
         if (_authenticated()) {
             $.ajaxSetup({
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + _identity().accessToken);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + _identity().token);
                 }
             });
         }
