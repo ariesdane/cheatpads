@@ -126,7 +126,7 @@
           "lib/dnx451/EntityFramework.Relational.Design.dll": {}
         }
       },
-      "IdentityModel/2.0.0-alpha1": {
+      "IdentityModel/2.0.0-alpha3": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.4"
@@ -148,16 +148,16 @@
           "lib/net451/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/1.0.0-beta1": {
+      "IdentityServer4/1.0.0-beta1-update1": {
         "type": "package",
         "dependencies": {
-          "IdentityModel": "2.0.0-alpha1",
+          "IdentityModel": "2.0.0-alpha3",
           "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
           "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
+          "Newtonsoft.Json": "8.0.2",
           "System.IdentityModel.Tokens.Jwt": "4.0.2.202250711"
         },
         "frameworkAssemblies": [
@@ -1783,7 +1783,7 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -2121,13 +2121,14 @@
           "lib/dnxcore50/EntityFramework.Relational.Design.dll": {}
         }
       },
-      "IdentityModel/2.0.0-alpha1": {
+      "IdentityModel/2.0.0-alpha3": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "6.0.4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Console": "4.0.0-beta-23516",
+          "System.Diagnostics.Tools": "4.0.1-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Net.Http": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -2144,17 +2145,17 @@
           "lib/dotnet5.4/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/1.0.0-beta1": {
+      "IdentityServer4/1.0.0-beta1-update1": {
         "type": "package",
         "dependencies": {
-          "IdentityModel": "2.0.0-alpha1",
+          "IdentityModel": "2.0.0-alpha3",
           "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
           "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
+          "Newtonsoft.Json": "8.0.2",
           "System.Collections": "4.0.11-beta-23516",
           "System.Collections.Specialized": "4.0.1-beta-23516",
           "System.IdentityModel.Tokens.Jwt": "5.0.0-rc1-211161024",
@@ -3688,7 +3689,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -5028,7 +5029,7 @@
           "lib/dnx451/EntityFramework.Relational.Design.dll": {}
         }
       },
-      "IdentityModel/2.0.0-alpha1": {
+      "IdentityModel/2.0.0-alpha3": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.4"
@@ -5050,16 +5051,16 @@
           "lib/net451/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/1.0.0-beta1": {
+      "IdentityServer4/1.0.0-beta1-update1": {
         "type": "package",
         "dependencies": {
-          "IdentityModel": "2.0.0-alpha1",
+          "IdentityModel": "2.0.0-alpha3",
           "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
           "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
+          "Newtonsoft.Json": "8.0.2",
           "System.IdentityModel.Tokens.Jwt": "4.0.2.202250711"
         },
         "frameworkAssemblies": [
@@ -6688,7 +6689,7 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -7051,7 +7052,7 @@
           "lib/dnx451/EntityFramework.Relational.Design.dll": {}
         }
       },
-      "IdentityModel/2.0.0-alpha1": {
+      "IdentityModel/2.0.0-alpha3": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.4"
@@ -7073,16 +7074,16 @@
           "lib/net451/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/1.0.0-beta1": {
+      "IdentityServer4/1.0.0-beta1-update1": {
         "type": "package",
         "dependencies": {
-          "IdentityModel": "2.0.0-alpha1",
+          "IdentityModel": "2.0.0-alpha3",
           "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
           "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
+          "Newtonsoft.Json": "8.0.2",
           "System.IdentityModel.Tokens.Jwt": "4.0.2.202250711"
         },
         "frameworkAssemblies": [
@@ -8711,7 +8712,7 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -9049,13 +9050,14 @@
           "lib/dnxcore50/EntityFramework.Relational.Design.dll": {}
         }
       },
-      "IdentityModel/2.0.0-alpha1": {
+      "IdentityModel/2.0.0-alpha3": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "6.0.4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Console": "4.0.0-beta-23516",
+          "System.Diagnostics.Tools": "4.0.1-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Net.Http": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -9072,17 +9074,17 @@
           "lib/dotnet5.4/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/1.0.0-beta1": {
+      "IdentityServer4/1.0.0-beta1-update1": {
         "type": "package",
         "dependencies": {
-          "IdentityModel": "2.0.0-alpha1",
+          "IdentityModel": "2.0.0-alpha3",
           "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
           "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
+          "Newtonsoft.Json": "8.0.2",
           "System.Collections": "4.0.11-beta-23516",
           "System.Collections.Specialized": "4.0.1-beta-23516",
           "System.IdentityModel.Tokens.Jwt": "5.0.0-rc1-211161024",
@@ -10619,7 +10621,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -12337,13 +12339,14 @@
           "lib/dnxcore50/EntityFramework.Relational.Design.dll": {}
         }
       },
-      "IdentityModel/2.0.0-alpha1": {
+      "IdentityModel/2.0.0-alpha3": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "6.0.4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Console": "4.0.0-beta-23516",
+          "System.Diagnostics.Tools": "4.0.1-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Net.Http": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -12360,17 +12363,17 @@
           "lib/dotnet5.4/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/1.0.0-beta1": {
+      "IdentityServer4/1.0.0-beta1-update1": {
         "type": "package",
         "dependencies": {
-          "IdentityModel": "2.0.0-alpha1",
+          "IdentityModel": "2.0.0-alpha3",
           "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
           "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
+          "Newtonsoft.Json": "8.0.2",
           "System.Collections": "4.0.11-beta-23516",
           "System.Collections.Specialized": "4.0.1-beta-23516",
           "System.IdentityModel.Tokens.Jwt": "5.0.0-rc1-211161024",
@@ -13907,7 +13910,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -15623,12 +15626,12 @@
         "lib/netcore50/_._"
       ]
     },
-    "IdentityModel/2.0.0-alpha1": {
+    "IdentityModel/2.0.0-alpha3": {
       "type": "package",
-      "sha512": "ynJYpHmUoEnc/jR+UjlWiutuyRE8tBfJMVP/7f4Uu6Qf6+B1dkt5OGtLCDGfcrRA02fvGtdpAz9oq8gvoCtNWw==",
+      "sha512": "Hct9Axzvo1wMYvvaAyUnbwAPcg5Xme2e02/9UOMM6nLE5OZK3fWY6Ds+zBZwQjnHo0zCyk6VEqpY1F9QdGcBAA==",
       "files": [
-        "IdentityModel.2.0.0-alpha1.nupkg",
-        "IdentityModel.2.0.0-alpha1.nupkg.sha512",
+        "IdentityModel.2.0.0-alpha3.nupkg",
+        "IdentityModel.2.0.0-alpha3.nupkg.sha512",
         "IdentityModel.nuspec",
         "lib/dotnet5.4/IdentityModel.dll",
         "lib/dotnet5.4/IdentityModel.xml",
@@ -15636,12 +15639,12 @@
         "lib/net451/IdentityModel.xml"
       ]
     },
-    "IdentityServer4/1.0.0-beta1": {
+    "IdentityServer4/1.0.0-beta1-update1": {
       "type": "package",
-      "sha512": "ldV6umyjvxsdaOQxyMc39nZLHHhwmNNi9Q4lgGGSFtWSMa6o7rWsLL7M2QUTpBIlBSUypbOHmHJ+Ss3uigzQ/A==",
+      "sha512": "0uXKLXnrQDZKgu2PfnWt9pdqjGOvPtx5WoXpnLuckAOUAEl9XsfHbH6At5Ztc6YYNJHA1FLfTas0qhhwJU9r/Q==",
       "files": [
-        "IdentityServer4.1.0.0-beta1.nupkg",
-        "IdentityServer4.1.0.0-beta1.nupkg.sha512",
+        "IdentityServer4.1.0.0-beta1-update1.nupkg",
+        "IdentityServer4.1.0.0-beta1-update1.nupkg.sha512",
         "IdentityServer4.nuspec",
         "lib/dotnet5.4/IdentityServer4.dll",
         "lib/dotnet5.4/IdentityServer4.xml",
@@ -17016,9 +17019,9 @@
         "ref/net46/Microsoft.Win32.Registry.dll"
       ]
     },
-    "Newtonsoft.Json/7.0.1": {
+    "Newtonsoft.Json/8.0.2": {
       "type": "package",
-      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
+      "sha512": "e5yWmEfu68rmtG431zl9N/7PlNKQDIuiDW5MHlEFAZcecakcxrIGnKqrPAtWNILzK2oNanRB5cD150MYhECK3g==",
       "files": [
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -17032,8 +17035,8 @@
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
-        "Newtonsoft.Json.7.0.1.nupkg",
-        "Newtonsoft.Json.7.0.1.nupkg.sha512",
+        "Newtonsoft.Json.8.0.2.nupkg",
+        "Newtonsoft.Json.8.0.2.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
       ]
@@ -21362,6 +21365,8 @@
       "EntityFramework.MicrosoftSqlServer >= 7.0.0-rc1-final",
       "Microsoft.ApplicationInsights.AspNet >= 1.0.0-rc1",
       "Microsoft.AspNet.Diagnostics >= 1.0.0-rc1-final",
+      "Microsoft.AspNet.Identity >= 3.0.0-rc1-final",
+      "Microsoft.AspNet.Identity.EntityFramework >= 3.0.0-rc1-final",
       "Microsoft.AspNet.IISPlatformHandler >= 1.0.0-rc1-final",
       "Microsoft.AspNet.Mvc >= 6.0.0-rc1-final",
       "Microsoft.AspNet.Mvc.TagHelpers >= 6.0.0-rc1-final",
@@ -21374,10 +21379,8 @@
       "Microsoft.Extensions.Logging >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Console >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
-      "Microsoft.AspNet.Identity >= 3.0.0-rc1-final",
-      "Microsoft.AspNet.Identity.EntityFramework >= 3.0.0-rc1-final",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final",
-      "IdentityServer4 >= 1.0.0-beta1"
+      "IdentityServer4 >= 1.0.0-beta1-update1"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []
