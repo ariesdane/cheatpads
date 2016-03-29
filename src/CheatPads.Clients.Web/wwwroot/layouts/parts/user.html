@@ -1,0 +1,10 @@
+﻿<div class="login-info">  
+    Welcome, <span data-bind="text: userName"></span> &nbsp;
+
+    <a data-bind="visible: authenticated, click: logout">
+        <i class="glyphicon glyphicon-log-out"></i>Logout
+    </a>
+    <a data-bind="visible: !authenticated(), click: login">
+        <i class="glyphicon glyphicon-log-in"></i>Login
+    </a>
+</div>

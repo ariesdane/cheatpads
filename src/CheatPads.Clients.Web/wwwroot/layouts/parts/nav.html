@@ -1,17 +1,10 @@
 ﻿<div class="navbar navbar-default">
-    <div class="navbar-left">
-        <ul class="nav navbar-nav" data-bind="foreach: routes">
-            <li data-bind="css: { active: $parent.currentHash() == hash }">
-                <a data-bind="attr: { href: hash }">
-                    <i data-bind="attr: { class: 'glyphicon glyphicon-' + icon }"></i>
-                    <!--ko text: title--><!--/ko-->
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="navbar-right">
-        <div class="nav navbar-nav">
-            <span data-bind="text: userMessage"></span>
-        </div>      
-    </div>
+    <ul class="nav navbar-nav" data-bind="foreach: routes">
+        <li data-bind="css: { active: $parent.currentHash() == hash }">
+            <a data-bind="attr: { href: hash }">
+                <i data-bind="attr: { class: 'glyphicon glyphicon-' + icon }"></i>
+                <!--ko text: title--><!--/ko-->
+            </a>
+        </li>
+    </ul>
 </div>

@@ -4,9 +4,12 @@
             "client_id=" + encodeURI(config.auth.clientId) + "&" +
             "scope=" + encodeURI(config.auth.scope) + "&" +
             "response_type=" + encodeURI(config.auth.responseType) + "&" +
-            "redirect_uri=" + encodeURI(config.auth.returnUrl) + "&" +
+            "redirect_uri=" + encodeURI(config.auth.loginUrlReturn) + "&" +
             "state=" + encodeURI(+new Date);
-    
+
+    var _logoutUrl = config.auth.logoutUrl + "?" +
+            "post_logout_redirect_uri=" +  encodeURIComponent(config.auth.logoutUrlReturn);
+
     var _identity = ko.observable({
         userName: "",
         accessToken: "",
@@ -70,6 +73,7 @@
         system.log("Logout & Removed Identity", _identity().userName);
 
         _clearIdentity();
+        location.href = _logoutUrl;
     }
 
     var _header = function () {

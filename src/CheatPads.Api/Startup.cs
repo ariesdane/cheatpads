@@ -21,11 +21,12 @@ namespace CheatPads.Api
     {
         public IConfigurationRoot Configuration { get; set; }
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env, IApplicationEnvironment environment)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
+                .SetBasePath(environment.ApplicationBasePath)
                 .AddJsonFile("config.json");
+
             Configuration = builder.Build();
         }
 

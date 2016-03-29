@@ -1,8 +1,8 @@
 ﻿define(["jquery", "base64"], function ($, base64) {
 
-    var _removeCookie = function (key, options) {
-        if ($.cookie(key) !== undefined) {
-            $.cookie(key, '', $.extend({}, options, { expires: -1 }));
+    var _removeCookie = function (key) {
+        if (_getCookie(key) !== undefined) {
+            _setCookie(key, '', { expires: -1 });
             return true;
         }
         return false;

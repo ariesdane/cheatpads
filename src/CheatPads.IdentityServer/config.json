@@ -1,0 +1,7 @@
+﻿{
+  "Data": {
+    "Development": {
+      "IdentityConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=CheatPads.Data;Integrated Security=True"
+    }
+  }
+}

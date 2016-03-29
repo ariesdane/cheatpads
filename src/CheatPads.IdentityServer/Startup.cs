@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNet.Builder;
 using System.Security.Cryptography.X509Certificates;
+
+using Microsoft.AspNet.Hosting;
+using Microsoft.Data.Entity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
-using Microsoft.AspNet.Hosting;
+
+using CheatPads.IdentityServer.Identity;
 
 namespace CheatPads.IdentityServer
 {
@@ -18,16 +23,24 @@ namespace CheatPads.IdentityServer
 
     public class Startup
     {
-        private readonly IApplicationEnvironment _environment;
+        //private readonly IApplicationEnvironment _environment;
+        public IConfigurationRoot Configuration { get; set; }
+        public string ApplicationBasePath { get; set; }
 
         public Startup(IApplicationEnvironment environment)
         {
-            _environment = environment;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(environment.ApplicationBasePath)
+                .AddJsonFile("config.json");
+
+
+            Configuration = builder.Build();
+            ApplicationBasePath = environment.ApplicationBasePath;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var cert = new X509Certificate2(Path.Combine(_environment.ApplicationBasePath, "server.pfx"), "");
+            var cert = new X509Certificate2(Path.Combine(ApplicationBasePath, "server.pfx"), "");
 
             var builder = services.AddIdentityServer(options =>
             {
@@ -39,7 +52,15 @@ namespace CheatPads.IdentityServer
             builder.AddInMemoryScopes(Scopes.Get());
             builder.AddInMemoryUsers(Users.Get());
 
-            // for the UI
+            // AspNet Identity
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<IdentityDbContext>(options => {
+                    options.UseSqlServer(Configuration["Data:Development:IdentityConnectionString"]);
+                });
+
+
+            // Identity Server UI
             services
                 .AddMvc()
                 .AddRazorOptions(razor =>
@@ -57,9 +78,7 @@ namespace CheatPads.IdentityServer
 
             app.UseDeveloperExceptionPage();
             app.UseIISPlatformHandler();
-
             app.UseIdentityServer();
-
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }

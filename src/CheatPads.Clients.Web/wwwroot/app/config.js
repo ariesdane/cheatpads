@@ -6,7 +6,9 @@
     },
     auth: {
         loginUrl: "https://localhost:44345/connect/authorize",
-        returnUrl: "http://localhost:61739/",
+        logoutUrl: "https://localhost:44345/ui/logout",
+        loginUrlReturn: "http://localhost:61739/",
+        logoutUrlReturn: "http://localhost:61739/",
         clientId: "CheatPads.Clients.Web",
         scope: "CheatPads.Api",
         responseType: "token"

@@ -7,19 +7,22 @@
     <link href="assets/cheatpads.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        <div class="toast-anchor"></div>
+    <div class="container">      
         <header>
             <div class="clearfix">
                 <compose class="pull-left" path="layouts/parts/head"></compose>
                 <div class="pull-right">
+                    <compose path="layouts/parts/user"></compose>
                     <compose path="layouts/parts/cart"></compose>
                 </div>
             </div>       
             <compose path="layouts/parts/nav"></compose>
         </header>
+        <div class="toast-anchor"></div>
         <div class="page-host"></div>
-        <compose path="layouts/parts/foot"></compose>
+        <footer>
+            <compose path="layouts/parts/foot"></compose>
+        </footer>
     </div>
     <script src="lib/requirejs/require.js" data-main="index"></script>
 </body>
