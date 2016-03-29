@@ -61,11 +61,20 @@ namespace CheatPads.Api
             services.AddScoped<IRepository<UserDocument>, UserDocumentRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
         {
             loggerFactory.MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
+
+            if (hostingEnvironment.IsDevelopment())
+            {
+                using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    scope.ServiceProvider.GetService<DataContext>().EnsureDbExists();
+                }
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseIISPlatformHandler();
             app.UseExceptionHandler("/Home/Error");

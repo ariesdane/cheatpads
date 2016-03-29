@@ -71,12 +71,21 @@ namespace CheatPads.IdentityServer
             services.AddTransient<LoginService>();
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(LogLevel.Verbose);
             loggerFactory.AddDebug(LogLevel.Verbose);
 
-            app.UseDeveloperExceptionPage();
+            if (hostingEnvironment.IsDevelopment())
+            {
+                using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    scope.ServiceProvider.GetService<IdentityDbContext>().EnsureDbExists();
+                }
+                app.UseDeveloperExceptionPage();
+            }
+
+          
             app.UseIISPlatformHandler();
             app.UseIdentityServer();
             app.UseStaticFiles();
