@@ -12,7 +12,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 
 using CheatPads.Api.Model;
 using CheatPads.Api.Repositories;
-using CheatPads.Data;
+using CheatPads.Api.Data;
 
 namespace CheatPads.Api
 {
@@ -32,6 +32,7 @@ namespace CheatPads.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // data services
             var connection = Configuration["Data:Development:SqliteConnectionString"];
 
             services.AddEntityFramework()
@@ -40,47 +41,51 @@ namespace CheatPads.Api
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<DataContext>(options => {
+                .AddDbContext<ApiDbContext>(options => {
                     options.UseSqlServer(Configuration["Data:Development:SqlServerConnectionString"]);
                 });
 
-            //Add Cors support to the service
-            services.AddCors();
-
+            // hosting
             var policy = new Microsoft.AspNet.Cors.Infrastructure.CorsPolicy();
 
+           // services.AddCors();    
             policy.Headers.Add("*");
             policy.Methods.Add("*");
             policy.Origins.Add("*");
             policy.SupportsCredentials = true;
 
             services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
-
             services.AddMvc();
+
+            // security
             services.AddScoped<IRepository<UserEvent>, UserEventRepository>();
             services.AddScoped<IRepository<UserDocument>, UserDocumentRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
         {
-            loggerFactory.MinimumLevel = LogLevel.Information;
-            loggerFactory.AddConsole();
-            loggerFactory.AddDebug();
-
+            // data services
             if (hostingEnvironment.IsDevelopment())
             {
                 using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    scope.ServiceProvider.GetService<DataContext>().EnsureDbExists();
+                    scope.ServiceProvider.GetService<ApiDbContext>().EnsureDbExists();
                 }
                 app.UseDeveloperExceptionPage();
             }
 
+            // logging & auditiong
+            loggerFactory.MinimumLevel = LogLevel.Information;
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+        
+            // hosting
             app.UseIISPlatformHandler();
             app.UseExceptionHandler("/Home/Error");
             app.UseCors("corsGlobalPolicy");
             app.UseStaticFiles();
 
+            // security
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
 
             app.UseJwtBearerAuthentication(options =>
@@ -91,12 +96,14 @@ namespace CheatPads.Api
             });
 
             app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "CheatPads.Api" });
+
+            // routing
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            });          
         }
 
         // Entry point for the application.

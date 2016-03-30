@@ -33,7 +33,7 @@ define(["ko", "system", "storage", "ajax", "auth", "config"], function (ko, syst
     // ajax interceptors for logging & security
     ajax.interceptors.push({
         request: function (options) {
-            auth.header();
+            auth.setBearerToken();
             system.info("Ajax Request", options);
         },
         success: function (data) {

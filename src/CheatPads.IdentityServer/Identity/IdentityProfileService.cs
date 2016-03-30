@@ -78,8 +78,12 @@ namespace CheatPads.IdentityServer.Identity
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtClaimTypes.Subject, user.Id),
-                new Claim(JwtClaimTypes.PreferredUserName, user.UserName)
+                new Claim(JwtClaimTypes.Subject, user.UserName),
+                new Claim(JwtClaimTypes.Name, user.FullName),
+                new Claim(JwtClaimTypes.PreferredUserName, user.DisplayName),
+                new Claim(JwtClaimTypes.FamilyName, user.LastName),
+                new Claim(JwtClaimTypes.GivenName, user.FirstName),
+                new Claim(JwtClaimTypes.Gender, user.Gender)
             };
 
             if (_userManager.SupportsUserEmail)

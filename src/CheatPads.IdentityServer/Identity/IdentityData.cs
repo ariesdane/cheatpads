@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CheatPads.IdentityServer.Identity
 {
-    public static class IdentitySeedData
+    public static class IdentityData
     {
 
         public static void EnsureSeeded(IdentityDbContext db)
@@ -15,12 +15,12 @@ namespace CheatPads.IdentityServer.Identity
             if (!db.Roles.Any())
             {
                 db.Roles.AddRange(new AppRole[] {
-                    new AppRole() { Id = "admin", Name = "Administrators" },
-                    new AppRole() { Id = "customer", Name = "Customers" },
-                    new AppRole() { Id = "user", Name = "Valid Users" }
+                    new AppRole() { Id = "admin", Name = "Administrator" },
+                    new AppRole() { Id = "customer", Name = "Customer" },
+                    new AppRole() { Id = "manager", Name = "Product Manager" },
+                    new AppRole() { Id = "user", Name = "Valid User" }
                 });
             }
-
 
             if (!db.Users.Any())
             {
@@ -28,31 +28,40 @@ namespace CheatPads.IdentityServer.Identity
                     new AppUser()
                     {
                         Id = userId_Admin,
+                        UserName = "admin",
                         Email = "admin@admin.com",
                         NormalizedEmail = "admin@admin.com",
-                        DisplayName = "Admin",
-                        UserName = "admin",
                         EmailConfirmed = true,
+                        FirstName = "Aries",
+                        LastName = "Dane",
+                        DisplayName = "Aries",
+                        Gender = "M",
                         PasswordHash = "admin||0", //pwd/salt/format 
                     },
                     new AppUser()
                     {
                         Id = userId_Joe,
-                        Email = "joe@cheatpads.com",
-                        NormalizedEmail = "joe@cheatpads.com",
-                        DisplayName = "Joe",
-                        UserName = "joe",
+                        UserName = "john",
+                        Email = "john@cheatpads.com",
+                        NormalizedEmail = "john@cheatpads.com",
                         EmailConfirmed = true,
+                        FirstName = "John",
+                        LastName = "Doe",
+                        DisplayName = "John D",
+                        Gender = "M",
                         PasswordHash = "joe||0", //pwd/salt/format 
                     },
                     new AppUser()
                     {
                         Id = userId_Jane,
+                        UserName = "jane",
                         Email = "jane@cheatpads.com",
                         NormalizedEmail = "jane@cheatpads.com",
-                        DisplayName = "Jane",
-                        UserName = "jane",
                         EmailConfirmed = true,
+                        FirstName = "Jane",
+                        LastName = "Doe",
+                        DisplayName = "Jane D",
+                        Gender = "F",
                         PasswordHash = "jane||0", //pwd/salt/format 
                     }
                 });
@@ -65,10 +74,10 @@ namespace CheatPads.IdentityServer.Identity
                 db.UserRoles.AddRange(new AppUserRole[]{
                     new AppUserRole() { UserId = userId_Admin, RoleId = "admin" },
                     new AppUserRole() { UserId = userId_Admin, RoleId = "user" },
-                    new AppUserRole() { UserId = userId_Joe, RoleId = "user" },
                     new AppUserRole() { UserId = userId_Joe, RoleId = "customer" },
+                    new AppUserRole() { UserId = userId_Joe, RoleId = "user" },
+                    new AppUserRole() { UserId = userId_Jane, RoleId = "manager" },
                     new AppUserRole() { UserId = userId_Jane, RoleId = "user" },
-                    new AppUserRole() { UserId = userId_Jane, RoleId = "customer" },
                 });
             }
             db.SaveChanges();

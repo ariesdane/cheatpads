@@ -8,8 +8,13 @@ namespace CheatPads.IdentityServer.Identity
     {
         // extend IdentityUser as needed
         public string DisplayName { get; set; }
-
-        public string Sex { get; set; } = "U";
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName
+        {
+            get{ return FirstName + " " + LastName; }
+        }
+        public string Gender { get; set; } = "U";
 
         public DateTime? BirthDate { get; set; }
 

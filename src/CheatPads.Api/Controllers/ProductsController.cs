@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 
-using CheatPads.Data;
-using CheatPads.Data.Models;
+using CheatPads.Api.Data;
+using CheatPads.Api.Data.Models;
 
 namespace Next.Api.Controllers
 {
@@ -15,9 +15,9 @@ namespace Next.Api.Controllers
     public class ProductsController : Controller
     {
 
-        private DataContext _dbContext;
+        private ApiDbContext  _dbContext;
 
-        public ProductsController(DataContext dbContext)
+        public ProductsController(ApiDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbContext.EnsureDbExists();

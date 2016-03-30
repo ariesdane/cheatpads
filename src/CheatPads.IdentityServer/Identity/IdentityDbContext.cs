@@ -30,7 +30,7 @@ namespace CheatPads.IdentityServer.Identity
 
         private static void configureAuthModel(ModelBuilder builder)
         {
-            builder.Entity<AppUser>().ToTable("User", "Auth");
+            builder.Entity<AppUser>().ToTable("User", "Auth").Ignore(x => x.FullName);
             builder.Entity<IdentityRole>().ToTable("Role", "Auth");
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin", "Auth");
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaim", "Auth");
@@ -40,8 +40,8 @@ namespace CheatPads.IdentityServer.Identity
 
         public void EnsureDbExists()
         {
-            Database.EnsureCreated();
-            IdentitySeedData.EnsureSeeded(this);
+            Database.Migrate();
+            IdentityData.EnsureSeeded(this);
         }
     }
 
