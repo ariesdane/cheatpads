@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 
 using CheatPads.Api.Data.Repositories;
 using CheatPads.Api.Data.Models;
 
-namespace Next.Api.Controllers
+namespace CheatPads.Api.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -33,8 +32,14 @@ namespace Next.Api.Controllers
         [HttpGet("{sku}")]
         public Product  Get(string sku)
         {
-            return _repo.Get(sku);
-            //return _dbContext.Products.FirstOrDefault(x => x.Sku == sku);
+            var item = _repo.Get(sku);
+
+            if (string.IsNullOrEmpty(item.Description)) {
+                // testing extension method for merging a model with a partial model;
+                item.SetValues(new { Description = "This is the best product ever", IgnoreMe = ":)" });
+            }
+
+            return item;
         }
 
         // GET api/products/sku01
@@ -42,7 +47,6 @@ namespace Next.Api.Controllers
         public void Delete(string sku)
         {
             _repo.Delete(sku);
-            //return _dbContext.Products.FirstOrDefault(x => x.Sku == sku);
         }
 
         // GET api/products/sku01
@@ -51,7 +55,6 @@ namespace Next.Api.Controllers
         {
             _repo.Update(product, sku);
             return product;
-            //return _dbContext.Products.FirstOrDefault(x => x.Sku == sku);
         }
 
         // GET api/products/sku01
@@ -60,7 +63,6 @@ namespace Next.Api.Controllers
         {
             _repo.Create(product);
             return product;
-            //return _dbContext.Products.FirstOrDefault(x => x.Sku == sku);
         }
 
     }
