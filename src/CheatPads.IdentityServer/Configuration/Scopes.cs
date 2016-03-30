@@ -23,7 +23,6 @@
                     DisplayName = "CheatPads API Resource Scope",
                     Type = ScopeType.Resource,
                     IncludeAllClaimsForUser = true,
-
                     Claims = new List<ScopeClaim>
                     {
                         new ScopeClaim("role")
