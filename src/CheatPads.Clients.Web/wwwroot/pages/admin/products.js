@@ -14,7 +14,7 @@
     }
 
     model.select = function (data) {
-        ajax.get("products", data.Sku).done(function (item) {
+        ajax.get("products", data.sku).done(function (item) {
             model.product(item);
         });
     }

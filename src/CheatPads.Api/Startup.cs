@@ -1,14 +1,14 @@
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
 using Microsoft.Dnx.Runtime;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json.Serialization;
 
 using CheatPads.Api.Data;
 using CheatPads.Api.Data.Models;
@@ -54,7 +54,10 @@ namespace CheatPads.Api
             policy.SupportsCredentials = true;
 
             services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             // security
            
@@ -82,7 +85,7 @@ namespace CheatPads.Api
             app.UseExceptionHandler("/Home/Error");
             app.UseCors("corsGlobalPolicy");
             app.UseStaticFiles();
-
+            
             // security
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
 
@@ -96,12 +99,7 @@ namespace CheatPads.Api
             app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "CheatPads.Api" });
 
             // routing
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });          
+            app.UseMvcWithDefaultRoute();    
         }
 
         // Entry point for the application.
