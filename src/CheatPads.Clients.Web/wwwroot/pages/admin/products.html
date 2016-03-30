@@ -10,10 +10,16 @@
     </thead>
     <tbody data-bind="foreach: products">
         <tr>
-            <td data-bind="text: Sku"></td>
+            <td>
+                <a data-bind="text: Sku, click: $parent.select"></a>
+            </td>
             <td data-bind="text: Name"></td>
             <td data-bind="text: Description"></td>
             <td></td>
         </tr>
     </tbody>
 </table>
+<br />
+<pre data-bind="visible: productJSON() != undefined, text: productJSON">
+
+</pre>

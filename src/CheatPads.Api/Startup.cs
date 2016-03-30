@@ -10,9 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 
-using CheatPads.Api.Model;
-using CheatPads.Api.Repositories;
 using CheatPads.Api.Data;
+using CheatPads.Api.Data.Models;
+using CheatPads.Api.Data.Repositories;
 
 namespace CheatPads.Api
 {
@@ -33,22 +33,21 @@ namespace CheatPads.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // data services
-            var connection = Configuration["Data:Development:SqliteConnectionString"];
-
-            services.AddEntityFramework()
-                .AddSqlite()
-                .AddDbContext<ResourceContext>(options => options.UseSqlite(connection));
-
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<ApiDbContext>(options => {
                     options.UseSqlServer(Configuration["Data:Development:SqlServerConnectionString"]);
                 });
 
+            services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped<ProductRepository>();
+
+            //services.AddScoped<IRepository<UserDocument>, UserDocumentRepository>();
+
             // hosting
             var policy = new Microsoft.AspNet.Cors.Infrastructure.CorsPolicy();
 
-           // services.AddCors();    
+            services.AddCors();    
             policy.Headers.Add("*");
             policy.Methods.Add("*");
             policy.Origins.Add("*");
@@ -58,8 +57,7 @@ namespace CheatPads.Api
             services.AddMvc();
 
             // security
-            services.AddScoped<IRepository<UserEvent>, UserEventRepository>();
-            services.AddScoped<IRepository<UserDocument>, UserDocumentRepository>();
+           
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
