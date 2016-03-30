@@ -10,7 +10,7 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchUrl": "https://localhost:44390/api/UserEvents",
+      "launchUrl": "https://localhost:2716/",
       "environmentVariables": {
         "ASPNET_ENV": "Development"
       },

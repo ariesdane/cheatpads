@@ -36,11 +36,11 @@ define(["ko", "system", "storage", "ajax", "auth", "config"], function (ko, syst
             auth.setBearerToken();
             system.info("Ajax Request", options);
         },
-        success: function (data) {
-            system.assert("Ajax Success", data);
+        success: function (status, data) {
+            system.assert("Ajax Success", { status: status });
         },
-        error: function (xhr, status, message) {
-            system.error("Ajax Error", { status: status, message: message });
+        error: function (status, text) {
+            system.error("Ajax Error", { status: status, text: text });
         },
         401: function () {
             auth.login();

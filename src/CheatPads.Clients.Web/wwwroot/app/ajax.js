@@ -40,20 +40,20 @@
             _interceptors.forEach(function (intercepetor) {
                 scopes.forEach(function (scope) {
                     if (typeof intercepetor[scope] === "function") {
-                        intercepetor[scope].apply(options.context, args);
+                        intercepetor[scope].apply(options, args);
                     }
                 });
             });
         }
 
         options.error = function (xhr, status, error) {
-            applyInterceptors(["response", "error", xhr.status], arguments);
-            error_fn && error_fn.apply(options.context, arguments);
+            applyInterceptors(["response", "error", xhr.status], [xhr.status, xhr.statusText]);
+            error_fn && error_fn.apply(options, [xhr.status, xhr.statusText]);
         };
 
         options.success = function (data, message, xhr) {
-            applyInterceptors(["response", "success", xhr.status], arguments);
-            success_fn && success_fn.apply(options.context, arguments);
+            applyInterceptors(["response", "success", xhr.status], [xhr.status, data]);
+            success_fn && success_fn.apply(options, [xhr.status, data]);
         }
 
         applyInterceptors(["request"], [options]);
