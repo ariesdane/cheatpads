@@ -33,8 +33,7 @@ namespace CheatPads.Api.Data
             // Execute against the in-memory entities, which we get from ChangeTracker (but not filtering the state of the entities).
             var lambdaExpression = (Expression<Func<TEntity, bool>>)Expression.Lambda(whereClause, entityParameter);
             var entries = context.ChangeTracker.Entries<TEntity>().Select((EntityEntry e) => (TEntity)e.Entity);
-            TEntity entity = entries.AsQueryable().Where(lambdaExpression).FirstOrDefault(); // First is what triggers the query execution.
-
+            TEntity entity = entries.AsQueryable().Where(lambdaExpression).FirstOrDefault();
             // If found in memory then we're done.
             if (entity != null) { return entity; }
 
