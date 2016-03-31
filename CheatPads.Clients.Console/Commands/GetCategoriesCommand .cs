@@ -10,7 +10,7 @@ namespace CheatPads.Clients.Console.Commands
 
     public class GetCategoriesCommand : ICommand
     {
-        public string Title { get; set; } = "Get Product Categories";
+        public string Title { get; set; } = "Get Api Product Categories";
 
         public string[] Arguments { get; set; }
 

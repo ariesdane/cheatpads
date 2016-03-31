@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace CheatPads.Api.Data.Repositories
+namespace CheatPads.Api.Data.Stores
 {
-    public interface IRepository<T>
+    public interface IEntityStore<T>
     {
         bool Exists(params object[] key);
 

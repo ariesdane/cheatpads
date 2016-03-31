@@ -25,7 +25,9 @@ namespace CheatPads.Clients.Console
         public const string IntrospectionEndpoint = _AuthBaseUrl + "/introspect";
 
         //api endpoints
-        public const string ProductsEndpoint = _ApiBaseUrl + "/products";
+        public const string ColorsEndpoint = _ApiBaseUrl + "/colors";
         public const string CategoriesEndpoint = _ApiBaseUrl + "/categories";
+        public const string ProductsEndpoint = _ApiBaseUrl + "/products";
+        public const string UsersEndpoint = _ApiBaseUrl + "/users";
     }
 }

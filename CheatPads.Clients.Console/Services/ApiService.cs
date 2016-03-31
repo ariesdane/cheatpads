@@ -20,6 +20,16 @@ namespace CheatPads.Clients.Console.Services
             return HttpGetArray(Settings.CategoriesEndpoint, setToken: true);
         }
 
+        public static JArray GetColors()
+        {
+            return HttpGetArray(Settings.ColorsEndpoint, setToken: true);
+        }
+
+        public static JObject GetUserPrinciple()
+        {
+            return HttpGetObject(Settings.UsersEndpoint + "/current", setToken: true);
+        }
+
 
         private static JArray HttpGetArray(string uri, bool setToken = false)
         {
@@ -32,6 +42,19 @@ namespace CheatPads.Clients.Console.Services
             string response = client.GetStringAsync(uri).Result;
 
             return JArray.Parse(response);
+        }
+
+        private static JObject HttpGetObject(string uri, bool setToken = false)
+        {
+            var client = new HttpClient();
+
+            if (setToken)
+            {
+                client.SetBearerToken(TokenService.CurrentTokenData?.AccessToken);
+            }
+            string response = client.GetStringAsync(uri).Result;
+
+            return JObject.Parse(response);
         }
 
     }

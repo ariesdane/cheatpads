@@ -2,10 +2,10 @@
 using System.Linq;
 using Microsoft.Data.Entity;
 
-namespace CheatPads.Api.Data.Repositories
+namespace CheatPads.Api.Data.Stores
 {
 
-    public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class GenericStore<TEntity> : IEntityStore<TEntity> where TEntity : class
     {
         internal DbContext dbContext;
         internal DbSet<TEntity> dbSet;
@@ -15,7 +15,7 @@ namespace CheatPads.Api.Data.Repositories
         /// </summary>
         /// <param name="context">The entity's parent db context</param>
         /// <param name="dbSetName">The entity's dataset name within it's db context</param>
-        public GenericRepository(DbContext context)
+        public GenericStore(DbContext context)
         {
             this.dbContext = context;
             this.dbSet = context.Set<TEntity>();

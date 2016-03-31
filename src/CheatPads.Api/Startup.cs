@@ -15,7 +15,7 @@ namespace CheatPads.Api
 {
     using CheatPads.Api.Data;
     using CheatPads.Api.Data.Models;
-    using CheatPads.Api.Data.Repositories;
+    using CheatPads.Api.Data.Stores;
 
     public class Startup
     {
@@ -39,8 +39,12 @@ namespace CheatPads.Api
                     options.UseSqlServer(Configuration["Data:Development:SqlServerConnectionString"]);
                 });
 
-            services.AddScoped<IRepository<Product>, ProductRepository>();
-            services.AddScoped<ProductRepository>();
+            services.AddScoped<IEntityStore<Product>, ProductStore>();
+            services.AddScoped<IEntityStore<Category>, CategoryStore>();
+
+            services.AddScoped<ProductStore>();
+            services.AddScoped<CategoryStore>();
+            services.AddScoped<ColorStore>();
 
             //services.AddScoped<IRepository<UserDocument>, UserDocumentRepository>();
 
@@ -56,6 +60,9 @@ namespace CheatPads.Api
             services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+                options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
             });
 
             // security
@@ -81,7 +88,6 @@ namespace CheatPads.Api
         
             // hosting
             app.UseIISPlatformHandler();
-            //app.UseExceptionHandler("/Home/Error");
             app.UseCors("corsGlobalPolicy");
             app.UseStaticFiles();
             

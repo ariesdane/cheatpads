@@ -9,9 +9,9 @@ namespace CheatPads.Clients.Console.Commands
 {
     using CheatPads.Clients.Console.Services;
 
-    public class GetProductsCommand : ICommand
+    public class GetUserPrincipleCommand : ICommand
     {
-        public string Title { get; set; } = "Get Api Product Data";
+        public string Title { get; set; } = "Get Api User Principle";
 
         public string[] Arguments { get; set; }
 
@@ -19,9 +19,9 @@ namespace CheatPads.Clients.Console.Commands
         {
             try
             {
-                var products = ApiService.GetProducts();
+                var principle = ApiService.GetUserPrinciple();
 
-                products.ToString().ColoredWriteLine(ConsoleColor.Gray);
+                principle.ToString().ColoredWriteLine(ConsoleColor.Gray);
             }
             catch(Exception ex)
             {

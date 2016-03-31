@@ -1,6 +1,5 @@
 ﻿using IdentityModel.Extensions;
 using System;
-using System.Net.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,9 +8,9 @@ namespace CheatPads.Clients.Console.Commands
 {
     using CheatPads.Clients.Console.Services;
 
-    public class GetProductsCommand : ICommand
+    public class GetColorsCommand : ICommand
     {
-        public string Title { get; set; } = "Get Api Product Data";
+        public string Title { get; set; } = "Get Api Color Data";
 
         public string[] Arguments { get; set; }
 
@@ -19,9 +18,9 @@ namespace CheatPads.Clients.Console.Commands
         {
             try
             {
-                var products = ApiService.GetProducts();
+                var colors = ApiService.GetColors();
 
-                products.ToString().ColoredWriteLine(ConsoleColor.Gray);
+                colors.ToString().ColoredWriteLine(ConsoleColor.Gray);
             }
             catch(Exception ex)
             {
