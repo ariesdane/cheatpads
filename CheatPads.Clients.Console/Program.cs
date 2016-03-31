@@ -13,9 +13,12 @@ namespace CheatPads.Clients.Console
         public static void Main(string[] args)
         {
             CommandManager.RegisterCommand(new StandardGreetingCommand());
-            CommandManager.RegisterCommand(new AdvancedGreetingCommand());
+            //CommandManager.RegisterCommand(new AdvancedGreetingCommand());
+            CommandManager.RegisterCommand(new ShowSettingsCommand());
             CommandManager.RegisterCommand(new ObtainTokenCommand());
             CommandManager.RegisterCommand(new PrintTokenDataCommand());
+            CommandManager.RegisterCommand(new GetProductsCommand());
+            CommandManager.RegisterCommand(new GetCategoriesCommand());
             CommandManager.RegisterCommand(new ExitAppCommand());
 
             CommandManager.ShowCommandMenu();

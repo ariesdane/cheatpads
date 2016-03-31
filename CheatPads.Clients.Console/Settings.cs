@@ -7,18 +7,25 @@ namespace CheatPads.Clients.Console
 {
     public static class Settings
     {
+        private const string _ApiBaseUrl = "https://localhost:44390/api";
+        private const string _AuthBaseUrl = "https://localhost:44345/connect";
+
+        // client crenditials
         public const string ClientId = "CheatPads.Clients.Console";
         public const string ClientSecret = "D7014A72BB75E3C";
         public const string ClientScope = "CheatPads.Api";
+      
+        // identity server endpoints
+        public const string AuthorizeEndpoint = _AuthBaseUrl + "/authorize";
+        public const string LogoutEndpoint = _AuthBaseUrl + "/endsession";
+        public const string TokenEndpoint = _AuthBaseUrl + "/token";
+        public const string TokenRevocationEndpoint = _AuthBaseUrl + "/revocation";
+        public const string UserInfoEndpoint = _AuthBaseUrl + "/userinfo";
+        public const string IdentityTokenValidationEndpoint = _AuthBaseUrl + "/identitytokenvalidation";
+        public const string IntrospectionEndpoint = _AuthBaseUrl + "/introspect";
 
-        public const string BaseAddress = "https://localhost:44345";
-
-        public const string AuthorizeEndpoint = BaseAddress + "/connect/authorize";
-        public const string LogoutEndpoint = BaseAddress + "/connect/endsession";
-        public const string TokenEndpoint = BaseAddress + "/connect/token";
-        public const string TokenRevocationEndpoint = BaseAddress + "/connect/revocation";
-        public const string UserInfoEndpoint = BaseAddress + "/connect/userinfo";
-        public const string IdentityTokenValidationEndpoint = BaseAddress + "/connect/identitytokenvalidation";
-        public const string IntrospectionEndpoint = BaseAddress + "/connect/introspect";
+        //api endpoints
+        public const string ProductsEndpoint = _ApiBaseUrl + "/products";
+        public const string CategoriesEndpoint = _ApiBaseUrl + "/categories";
     }
 }

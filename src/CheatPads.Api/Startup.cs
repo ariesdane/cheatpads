@@ -1,21 +1,21 @@
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
 using Microsoft.Data.Entity;
-using Microsoft.Dnx.Runtime;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
-
-using CheatPads.Api.Data;
-using CheatPads.Api.Data.Models;
-using CheatPads.Api.Data.Repositories;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace CheatPads.Api
 {
+    using CheatPads.Api.Data;
+    using CheatPads.Api.Data.Models;
+    using CheatPads.Api.Data.Repositories;
 
     public class Startup
     {
@@ -54,13 +54,12 @@ namespace CheatPads.Api
             policy.SupportsCredentials = true;
 
             services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
-            services.AddMvc().AddJsonOptions(options =>
-            {
+            services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
             // security
-           
+            services.AddTransient<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
@@ -82,12 +81,13 @@ namespace CheatPads.Api
         
             // hosting
             app.UseIISPlatformHandler();
-            app.UseExceptionHandler("/Home/Error");
+            //app.UseExceptionHandler("/Home/Error");
             app.UseCors("corsGlobalPolicy");
             app.UseStaticFiles();
             
             // security
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
+            
 
             app.UseJwtBearerAuthentication(options =>
             {
@@ -95,6 +95,18 @@ namespace CheatPads.Api
                 options.Audience = "https://localhost:44345/resources";
                 options.AutomaticAuthenticate = true;
             });
+
+            /*
+            app.UseIdentityServerAuthentication(options =>
+            {
+                options.Authority = "https://localhost:44345";
+                options.ScopeName = "CheatPads.Api";
+                options.ScopeSecret = "D7014A72BB75E3C";
+
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = true;
+            });
+            */
 
             app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "CheatPads.Api" });
 

@@ -39,7 +39,7 @@
                     ClientId = "CheatPads.Clients.Console",
                     ClientSecrets = new List<Secret>()
                     {
-                        new Secret("D7014A72BB75E3C")
+                        new Secret("D7014A72BB75E3C".Sha256())
                     },
                     Flow = Flows.ClientCredentials,
                     AllowClientCredentialsOnly = true,

@@ -29,18 +29,16 @@ namespace CheatPads.Clients.Console.Services
         {
             if (CurrentTokenData == null)
             {
-                "Token data is null. Obtain an access token before calling this command.".ConsoleRed();
+                "Token data is null. Obtain an access token first.".ConsoleRed();
             }
             else if (CurrentTokenData.IsValid)
             {
-                "TOKEN HEADER:".ConsoleGreen();
-                System.Console.WriteLine();
-                System.Console.WriteLine(CurrentTokenData.Header);
+                "TOKEN HEADER:".ColoredWriteLine(ConsoleColor.Gray);
+                PrintDictionary(CurrentTokenData.Header);
                 System.Console.WriteLine();
 
-                "TOKEN CLAIMS:".ConsoleGreen();
-                System.Console.WriteLine();
-                System.Console.WriteLine(CurrentTokenData.Claims);
+                "TOKEN CLAIMS:".ColoredWriteLine(ConsoleColor.Gray);
+                PrintDictionary(CurrentTokenData.Claims);
             }
             else
             {
@@ -49,6 +47,15 @@ namespace CheatPads.Clients.Console.Services
 
                 CurrentTokenData.ErrorReason.ConsoleRed();
                 System.Console.WriteLine();
+            }
+        }
+
+        private static void PrintDictionary(IDictionary<string, object> entries)
+        {
+            var itor = entries.GetEnumerator();
+            while (itor.MoveNext())
+            {
+                String.Format("--> {0}: {1}", itor.Current.Key, itor.Current.Value).ColoredWriteLine(ConsoleColor.Gray);
             }
         }
     }

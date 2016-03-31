@@ -1,13 +1,12 @@
-﻿namespace CheatPads.Api
+﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Http;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
+namespace CheatPads.Api
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Http;
-
     public class RequiredScopesMiddleware
     {
         private readonly RequestDelegate _next;
