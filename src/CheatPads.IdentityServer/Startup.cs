@@ -53,25 +53,26 @@ namespace CheatPads.IdentityServer
 
             builder.AddInMemoryClients(Clients.Get());
             builder.AddInMemoryScopes(Scopes.Get());
-            builder.AddInMemoryUsers(Users.Get());
+            //builder.AddInMemoryUsers(Users.Get()); 
 
-            // AspNet Identity
+            // AspNet Identity (instead in memory users)
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<IdentityDbContext>(options => {
                     options.UseSqlServer(Configuration["Data:Development:IdentityConnectionString"]);
                 });
             
-            services.AddTransient<IResourceOwnerPasswordValidator, IdentityResourceOwnerPasswordValidator>();
-            services.AddTransient<IProfileService, IdentityProfileService>();
             services.AddIdentity<AppUser, AppRole>(options => {
                     options.Password.RequireDigit = true;
                     options.Password.RequiredLength = 6;
                 })
                 .AddEntityFrameworkStores<IdentityDbContext>()
-                .AddUserManager<IdentityUserManager<AppUser>>()
-                .AddRoleManager<IdentityRoleManager<AppRole>>();
+                .AddUserManager<IdentityUserManager>()
+                .AddRoleManager<IdentityRoleManager>();
 
+            // IdentityServer Service Hooks to Use Identity Server
+            services.AddTransient<IResourceOwnerPasswordValidator, IdentityPasswordValidator>();
+            services.AddTransient<IProfileService, IdentityProfileService>();
 
             // Identity Server UI
             services
@@ -81,7 +82,6 @@ namespace CheatPads.IdentityServer
                     razor.ViewLocationExpanders.Add(new CustomViewLocationExpander());
                 });
 
-            services.AddTransient<LoginService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
@@ -97,7 +97,6 @@ namespace CheatPads.IdentityServer
                 }
                 app.UseDeveloperExceptionPage();
             }
-
           
             app.UseIISPlatformHandler();
             app.UseIdentityServer();

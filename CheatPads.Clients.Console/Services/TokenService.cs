@@ -15,11 +15,27 @@ namespace CheatPads.Clients.Console.Services
     {
         public static TokenData CurrentTokenData { get; set; }
 
-        public static TokenData ObtainToken()
+        public static TokenData ObtainClientToken()
         {
-            var client = new TokenClient(Settings.TokenEndpoint, Settings.ClientId, Settings.ClientSecret, AuthenticationStyle.PostValues);
-            var response = client.RequestClientCredentialsAsync(Settings.ClientScope).Result;
+            var client = new TokenClient(Settings.TokenEndpoint, Settings.ClientId, Settings.ClientSecret);
+            var response = client.RequestClientCredentialsAsync(Settings.ResourceScope).Result;
 
+            CurrentTokenData = new TokenData(response);
+
+            return CurrentTokenData;
+        }
+
+        public static TokenData ObtainUserToken(string username, string password)
+        {
+            var client = new TokenClient(Settings.TokenEndpoint, Settings.ClientId + ".User", Settings.ClientSecret);
+
+            // can pass through additional params to the user service
+            var optional = new
+            {
+                acr_values = "tenant:custom_account_store1 foo bar quux"
+            };
+
+            var response = client.RequestResourceOwnerPasswordAsync(username, password, Settings.ResourceScope).Result;
             CurrentTokenData = new TokenData(response);
 
             return CurrentTokenData;

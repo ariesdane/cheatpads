@@ -5,11 +5,11 @@
 
     using IdentityServer4.Core.Services.InMemory;
 
-    public class LoginService
+    public class LoginService2
     {
         private readonly List<InMemoryUser> _users;
 
-        public LoginService(List<InMemoryUser> users)
+        public LoginService2(List<InMemoryUser> users)
         {
             _users = users;
         }

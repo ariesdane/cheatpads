@@ -13,8 +13,8 @@ namespace CheatPads.Clients.Console
         // client crenditials
         public const string ClientId = "CheatPads.Clients.Console";
         public const string ClientSecret = "D7014A72BB75E3C";
-        public const string ClientScope = "CheatPads.Api";
-      
+        public const string ResourceScope = "CheatPads.Api";
+
         // identity server endpoints
         public const string AuthorizeEndpoint = _AuthBaseUrl + "/authorize";
         public const string LogoutEndpoint = _AuthBaseUrl + "/endsession";

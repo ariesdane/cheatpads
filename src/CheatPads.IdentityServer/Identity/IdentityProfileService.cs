@@ -14,9 +14,9 @@ namespace CheatPads.IdentityServer.Identity
 {
     public class IdentityProfileService : IProfileService
     {
-        private readonly IdentityUserManager<AppUser> _userManager;
+        private readonly IdentityUserManager _userManager;
 
-        public IdentityProfileService(IdentityUserManager<AppUser> userManager)
+        public IdentityProfileService(IdentityUserManager userManager)
         {
             _userManager = userManager;
         }

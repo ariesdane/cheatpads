@@ -11,13 +11,15 @@
 
     using Microsoft.AspNet.Mvc;
 
+    using CheatPads.IdentityServer.Identity;
+
     public class LoginController : Controller
     {
-        private readonly LoginService _loginService;
+        private readonly IdentityUserManager _loginService;
         private readonly SignInInteraction _signInInteraction;
 
         public LoginController(
-            LoginService loginService, 
+            IdentityUserManager loginService, 
             SignInInteraction signInInteraction)
         {
             _loginService = loginService;
@@ -48,15 +50,14 @@
         {
             if (ModelState.IsValid)
             {
-                if (_loginService.ValidateCredentials(model.Username, model.Password))
+                var user = await _loginService.FindByNameAsync(model.Username);
+
+                if (user != null && await _loginService.CheckPasswordAsync(user, model.Password))
                 {
-                    var user = _loginService.FindByUsername(model.Username);
-
-                    var name = user.Claims.Where(x => x.Type == JwtClaimTypes.Name).Select(x => x.Value).FirstOrDefault() ?? user.Username;
-
+                   
                     var claims = new Claim[] {
-                        new Claim(JwtClaimTypes.Subject, user.Subject),
-                        new Claim(JwtClaimTypes.Name, name),
+                        new Claim(JwtClaimTypes.Subject, user.Id),
+                        new Claim(JwtClaimTypes.Name, user.UserName),
                         new Claim(JwtClaimTypes.IdentityProvider, "idsvr"),
                         new Claim(JwtClaimTypes.AuthenticationTime, DateTime.UtcNow.ToEpochTime().ToString()),
                     };

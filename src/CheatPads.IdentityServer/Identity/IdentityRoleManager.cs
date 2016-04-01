@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace CheatPads.IdentityServer.Identity
 {
-    public class IdentityRoleManager<AppRole> : RoleManager<AppRole> where AppRole : class
+    public class IdentityRoleManager : RoleManager<AppRole>
     {
         public IdentityRoleManager(
             IRoleStore<AppRole> roleStore,

@@ -14,7 +14,8 @@ namespace CheatPads.Clients.Console
         {
             CommandManager.RegisterCommand(new ShowGreetingCommand());
             CommandManager.RegisterCommand(new ShowSettingsCommand());
-            CommandManager.RegisterCommand(new ObtainTokenCommand());
+            CommandManager.RegisterCommand(new ObtainClientTokenCommand());
+            CommandManager.RegisterCommand(new ObtainUserTokenCommand());
             CommandManager.RegisterCommand(new PrintTokenDataCommand());
             CommandManager.RegisterCommand(new GetUserPrincipleCommand());
             CommandManager.RegisterCommand(new GetProductsCommand());

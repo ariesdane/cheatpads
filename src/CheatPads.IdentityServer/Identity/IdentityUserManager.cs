@@ -4,10 +4,11 @@ using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.OptionsModel;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace CheatPads.IdentityServer.Identity
 {
-    public class IdentityUserManager<AppUser> : UserManager<AppUser> where AppUser : class
+    public class IdentityUserManager : UserManager<AppUser>
     {
         public IdentityUserManager(
             IUserStore<AppUser> userStore, 
@@ -24,6 +25,18 @@ namespace CheatPads.IdentityServer.Identity
         ) : base(userStore, options, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger, contextAccessor)
         {
             // stub class... to be customized later
+        }
+
+
+        public override async Task<bool> CheckPasswordAsync(AppUser user , string password)
+        {
+            // developers can user plain text passwords for test
+            if (user != null && user.PasswordHash.EndsWith("||0")) { 
+                return (user.PasswordHash == password + "||0");
+            }
+
+            // otherwise use base method to validate against hashed passwords
+            return await base.CheckPasswordAsync(user, password);
         }
     }
 }

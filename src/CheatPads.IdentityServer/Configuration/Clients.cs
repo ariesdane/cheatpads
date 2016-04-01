@@ -53,6 +53,23 @@
                 },
                 new Client
                 {
+                    ClientName = "CheatPads Console Client",
+                    ClientId = "CheatPads.Clients.Console.User",
+                    ClientSecrets = new List<Secret>()
+                    {
+                        new Secret("D7014A72BB75E3C".Sha256())
+                    },
+                    Flow = Flows.ResourceOwner,
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "email",
+                        "profile",
+                        "CheatPads.Api"
+                    }
+                },
+                new Client
+                {
                     ClientName = "CheatPads MVC Client",
                     ClientId = "CheatPads.Clients.MVC",
                     Flow = Flows.Implicit,
