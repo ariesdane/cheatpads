@@ -27,6 +27,16 @@ namespace CheatPads.Api
                     context.Response.OnCompleted(Send403, context);
                     return;
                 }
+                else
+                {
+                    var roles = context.User.Claims.Where(x => x.Type == "role")?.Select(x => x.Value);
+                    var userName = context.User.Claims.FirstOrDefault(x => x.Type == "name")?.Value;
+                    var clientId = context.User.Claims.FirstOrDefault(x => x.Type == "client_id")?.Value;
+
+                    var identity = new System.Security.Principal.GenericIdentity(userName ?? clientId);
+
+                    context.User = new System.Security.Principal.GenericPrincipal(identity, roles.ToArray());
+                }
             }
 
             await _next(context);

@@ -30,6 +30,11 @@ namespace CheatPads.Clients.Console.Services
             return HttpGetObject(Settings.UsersEndpoint + "/current", setToken: true);
         }
 
+        public static JArray GetUsers()
+        {
+            return HttpGetArray(Settings.UsersEndpoint, setToken: true);
+        }
+
 
         private static JArray HttpGetArray(string uri, bool setToken = false)
         {

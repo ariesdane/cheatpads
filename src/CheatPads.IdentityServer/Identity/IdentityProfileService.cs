@@ -113,6 +113,11 @@ namespace CheatPads.IdentityServer.Identity
             {
                 var roles = await _userManager.GetRolesAsync(user);
                 claims.AddRange(roles.Select(role => new Claim(JwtClaimTypes.Role, role)));
+
+                foreach(var role in roles)
+                {
+                    user.Roles.Add(new AppUserRole() { RoleId =  role });
+                }
             }
 
             return claims;

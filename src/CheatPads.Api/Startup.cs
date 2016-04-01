@@ -51,7 +51,7 @@ namespace CheatPads.Api
             // hosting
             var policy = new Microsoft.AspNet.Cors.Infrastructure.CorsPolicy();
 
-            services.AddCors();    
+            services.AddCors();
             policy.Headers.Add("*");
             policy.Methods.Add("*");
             policy.Origins.Add("*");
@@ -95,24 +95,28 @@ namespace CheatPads.Api
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
             
 
+            /*
             app.UseJwtBearerAuthentication(options =>
             {
                 options.Authority = "https://localhost:44345";
                 options.Audience = "https://localhost:44345/resources";
                 options.AutomaticAuthenticate = true;
+                options.Configuration.
             });
+            */
 
-            /*
+
             app.UseIdentityServerAuthentication(options =>
             {
                 options.Authority = "https://localhost:44345";
                 options.ScopeName = "CheatPads.Api";
-                options.ScopeSecret = "D7014A72BB75E3C";
 
                 options.AutomaticAuthenticate = true;
                 options.AutomaticChallenge = true;
+                options.NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
+                options.RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
             });
-            */
+
 
             app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "CheatPads.Api" });
 

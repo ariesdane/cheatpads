@@ -4,6 +4,15 @@
         <name>CheatPads.Api</name>
     </assembly>
     <members>
+        <member name="M:CheatPads.Api.AuthorizeRouteParam.#ctor(System.String,System.String)">
+            <summary>
+            Performs a claims authorization check for the claim type specified based the 
+            current value of a route parameter to inspect.
+            </summary>
+            <param name="claimType">Claim type to authorize</param>
+            <param name="paramName">Parameter name to inspect</param>
+            <remarks>[AriesDane] 2015-02-13</remarks>
+        </member>
         <member name="M:CheatPads.Api.Data.Stores.GenericStore`1.#ctor(Microsoft.Data.Entity.DbContext)">
             <summary>
             Base constructor for initializing the DataStore class
