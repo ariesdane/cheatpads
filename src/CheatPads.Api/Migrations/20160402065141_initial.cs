@@ -5,7 +5,7 @@ using Microsoft.Data.Entity.Metadata;
 
 namespace CheatPads.Api.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,8 +30,10 @@ namespace CheatPads.Api.Migrations
                 {
                     Sku = table.Column<string>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Details = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

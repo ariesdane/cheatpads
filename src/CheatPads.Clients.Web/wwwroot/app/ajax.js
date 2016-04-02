@@ -23,7 +23,7 @@
             var parts = [], key, val;
             for (key in data) {
                 val = $.isArray(data[key]) ? data[key].join(",") : data[key];
-                parts.push(key + "=" + window.encodeURIComponent(value));
+                parts.push(key + "=" + window.encodeURIComponent(val));
             }
             return "?" + parts.join("&");
         }
@@ -75,7 +75,7 @@
             return _ajax({ url: _url(path, id) + _queryString(query), type: "GET" });
         },
         post: function (path, data) {
-            return _ajax({ url: _url(path), data: data, type: "POST" });
+            return _ajax({ url: _url(path), data: data, type: "POST", headers: {'Content-Type': 'application/x-www-form-urlencoded'} });
         },
         put: function (path, id, data) {
             return _ajax({ url: _url(path, id), data: data, type: "PUT" });

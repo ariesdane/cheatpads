@@ -8,10 +8,9 @@ using CheatPads.Api.Data;
 namespace CheatPads.Api.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20160330013058_Initial")]
-    partial class Initial
+    partial class ApiDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -37,9 +36,13 @@ namespace CheatPads.Api.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Details");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Image");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("Title");
 
                     b.HasKey("Sku");
 

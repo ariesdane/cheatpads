@@ -43,6 +43,7 @@
                     },
                     Flow = Flows.ClientCredentials,
                     AllowClientCredentialsOnly = true,
+                    AllowAccessToAllCustomGrantTypes = true,
                     AllowedScopes = new List<string>
                     {
                         "openid",

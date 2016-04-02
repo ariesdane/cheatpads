@@ -19,7 +19,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.Clients.Web", "sr
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.IdentityServer", "src\CheatPads.IdentityServer\CheatPads.IdentityServer.xproj", "{BDA03321-C60F-4A32-9D34-882DFEE9C3E7}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.Clients.Console", "CheatPads.Clients.Console\CheatPads.Clients.Console.xproj", "{AB38BFAD-C168-4D4D-9055-EE409C2E73A7}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.Clients.Console", "src\CheatPads.Clients.Console\CheatPads.Clients.Console.xproj", "{AB38BFAD-C168-4D4D-9055-EE409C2E73A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

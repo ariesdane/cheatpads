@@ -9,15 +9,24 @@ namespace CheatPads.Clients.Console.Services
 
     public static class ApiService
     {
+        public static JObject GetProduct(string sku)
+        {
+            return HttpGetObject(Settings.ProductsEndpoint + "/" + sku);
+        }
 
         public static JArray GetProducts()
         {
-            return HttpGetArray(Settings.ProductsEndpoint, setToken: true);
+            return HttpGetArray(Settings.ProductsEndpoint);
+        }
+
+        public static JArray GetProductsByCategory(string categoryName)
+        {
+            return HttpGetArray(Settings.ProductsEndpoint + "/cat/" + categoryName);
         }
 
         public static JArray GetCategories()
         {
-            return HttpGetArray(Settings.CategoriesEndpoint, setToken: true);
+            return HttpGetArray(Settings.CategoriesEndpoint);
         }
 
         public static JArray GetColors()

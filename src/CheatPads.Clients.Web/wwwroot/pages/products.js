@@ -1,11 +1,11 @@
-﻿define(["services/products", "services/cart", "app/dialog"], function (products, cart, dialog) {
+﻿define(["services/products", "services/cart", "app/dialog", "ko"], function (products, cart, dialog, ko) {
     var model = {};
 
-    model.products = [].concat(products.anime, products.popular).sort(
-        function (a, b) {
-            return a.title < b.title ? -1 : 1;
-        }
-    )
+    model.products = ko.observableArray();
+
+    model.init = function () {
+        products.getAll().as(model.products);
+    }
 
     model.addToCart = function (data) {
         cart.add(data);

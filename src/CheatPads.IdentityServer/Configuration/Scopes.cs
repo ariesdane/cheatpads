@@ -22,7 +22,7 @@
                     Name = "CheatPads.Api",
                     DisplayName = "CheatPads API Resource Scope",
                     Type = ScopeType.Resource,
-                    IncludeAllClaimsForUser = true
+                    IncludeAllClaimsForUser = true    
                 }
             };
         }

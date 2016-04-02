@@ -10,20 +10,15 @@ namespace CheatPads.Api.Data.Stores
         public ProductStore(ApiDbContext context) : base(context)
         {
         }
-
-        public new IQueryable<Product> List()
-        {
-            return dbSet.Include(x => x.Category);
-        }
-
-        public Product Get(string sku)
-        {
-            return dbSet.Where(x => x.Sku == sku).Include(x => x.Category).FirstOrDefault();
-        }
-
+       
         public IQueryable<Product> ListByCategory(int categoryId)
         {
-            return dbSet.Where(x => x.CategoryId == categoryId).Include(x => x.Category);
+            return dbSet.Where(x => x.CategoryId == categoryId);
+        }
+
+        public IQueryable<Product> ListByCategory(string categoryName)
+        {
+            return dbSet.Where(x => x.Category.Name == categoryName);
         }
     }
 }

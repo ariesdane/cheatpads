@@ -9,7 +9,6 @@ namespace CheatPads.Api.Controllers
     using CheatPads.Api.Data.Stores;
     using CheatPads.Api.Data.Models;
 
-    [Authorize]
     [Route("api/[controller]")]
     public class CategoriesController : Controller
     {

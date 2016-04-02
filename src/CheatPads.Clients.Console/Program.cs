@@ -20,6 +20,8 @@ namespace CheatPads.Clients.Console
             CommandManager.RegisterCommand(new GetUserPrincipleCommand());
             CommandManager.RegisterCommand(new GetUsersCommand());
             CommandManager.RegisterCommand(new GetProductsCommand());
+            CommandManager.RegisterCommand(new GetProductDetailsCommand());
+            CommandManager.RegisterCommand(new GetProductsByCategoryCommand());
             CommandManager.RegisterCommand(new GetCategoriesCommand());
             CommandManager.RegisterCommand(new GetColorsCommand());         
             CommandManager.RegisterCommand(new ExitAppCommand());

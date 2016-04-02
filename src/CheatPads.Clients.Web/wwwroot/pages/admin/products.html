@@ -4,7 +4,7 @@
         <tr>
             <th>Sku</th>
             <th>Title</th>
-            <th>Details</th>
+            <th>Image</th>
             <th>Price</th>
         </tr>
     </thead>
@@ -13,9 +13,11 @@
             <td>
                 <a data-bind="text: sku, click: $parent.select"></a>
             </td>
-            <td data-bind="text: name"></td>
-            <td data-bind="text: description"></td>
-            <td></td>
+            <td data-bind="text: title"></td>
+            <td data-bind="text: image"></td>
+            <td class="text-right">
+                <span data-bind="text: price"></span>
+            </td>
         </tr>
     </tbody>
 </table>

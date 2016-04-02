@@ -20,7 +20,7 @@
         { hash: "#history", title: 'History', path: 'pages/history', icon: "list" },
         { hash: "#test", title: 'Test', path: 'pages/test', icon: "flash" },
         { hash: "#colors", title: 'Colors', path: 'pages/colors', icon: "flash" },
-        { hash: "#admin/products", title: 'Product Admin', path: 'pages/admin/products', icon: "cog" }
+        { hash: "#admin/users", title: 'User Admin', path: 'pages/admin/users', icon: "cog" },
     ],
     widgets: [
         { name: "dropdown", path: "widgets/dropdown" }

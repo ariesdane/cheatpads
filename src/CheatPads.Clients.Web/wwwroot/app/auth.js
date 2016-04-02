@@ -68,13 +68,17 @@
             location.href = _logoutUrl;
         },
         setBearerToken: function () {
-            if (_authenticated()) {
-                $.ajaxSetup({
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('Authorization', 'Bearer ' + _identity().token);
+            $.ajaxSetup({
+                beforeSend: function (xhr) {
+                    //xhr.setRequestHeader('Authorization', _authenticated()
+                    //    ? "Bearer " + _identity().accessToken
+                    //    : "Basic " + base64.encode(config.auth.clientId)
+                    //);
+                    if (_authenticated()) {
+                        xhr.setRequestHeader('Authorization', "Bearer " + storage.get("access_token"));
                     }
-                });
-            }
+                }
+            });
         },
         init: function(){
             var accessToken = _getQueryParam("access_token"),

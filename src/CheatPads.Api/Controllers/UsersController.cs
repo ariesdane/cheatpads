@@ -30,8 +30,45 @@ namespace CheatPads.Api.Controllers
             return this.User;
         }
 
+        [HttpGet("{id}")]
+        public dynamic Get(string id)
+        {
+            var command = _dbContext.Database.GetDbConnection().CreateCommand();
+            dynamic data = null;
+
+            command.Connection.Open();
+            command.CommandText = String.Format("SELECT * FROM [Auth].[User] WHERE Id = '{0}'", id);
+
+            var reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                data = new
+                {
+                    Id = reader["Id"],
+                    AccessFailedCount = reader["AccessFailedCount"],
+                    ConcurrencyStamp = reader["ConcurrencyStamp"],
+                    UserName = reader["UserName"],
+                    Email = reader["Email"],
+                    EmailConfirmed = reader["EmailConfirmed"],
+                    LockoutEnabled = reader["LockoutEnabled"],
+                    LockoutEnd = reader["LockoutEnd"],
+                    PhoneNumber = reader["PhoneNumber"],
+                    PhoneNumberConfirmed = reader["PhoneNumberConfirmed"],
+                    SecurityStamp = reader["SecurityStamp"],
+                    TwoFactorEnabled = reader["TwoFactorEnabled"],
+                    DisplayName = reader["DisplayName"],
+                    FirstName = reader["FirstName"],
+                    LastName = reader["LastName"],
+                    Gender = reader["Gender"],
+                    BirthDate = reader["BirthDate"]
+                };
+            }
+            command.Connection.Close();
+            return data;
+        }
+
         // GET: api/users
-        [HttpGet, Authorize(Roles = "Administrator")]
+        [HttpGet, Authorize(Roles = "Administrators")]
         public IEnumerable<dynamic> Get()
         {
 
@@ -42,22 +79,21 @@ namespace CheatPads.Api.Controllers
             var data = new List<dynamic>();
 
             command.Connection.Open();
-
             command.CommandText = "SELECT * FROM [Auth].[User]";
 
             var reader = command.ExecuteReader();
-
             while (reader.Read())
             {
                 data.Add(new
                 {
+                    Id = reader["Id"],
                     UserName = reader["UserName"],
                     Email = reader["Email"],
+                    EmailConfirmed = reader["EmailConfirmed"],
                     DisplayName = reader["DisplayName"],
                     FirstName = reader["FirstName"],
                     LastName = reader["LastName"],
-                    Gender = reader["Gender"],
-                    BirthDate = reader["BirthDate"]
+                    Gender = reader["Gender"]
                 });
             }
 

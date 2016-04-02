@@ -15,10 +15,10 @@ namespace CheatPads.IdentityServer.Identity
             if (!db.Roles.Any())
             {
                 db.Roles.AddRange(new AppRole[] {
-                    new AppRole() { Id = "admin", Name = "Administrator" },
-                    new AppRole() { Id = "customer", Name = "Customer" },
-                    new AppRole() { Id = "manager", Name = "Product Manager" },
-                    new AppRole() { Id = "user", Name = "Valid User" }
+                    new AppRole() { Id = "admin", Name = "Administrators" },
+                    new AppRole() { Id = "customer", Name = "Customers" },
+                    new AppRole() { Id = "manager", Name = "Managers" },
+                    new AppRole() { Id = "user", Name = "Users" }
                 });
             }
 
@@ -29,6 +29,7 @@ namespace CheatPads.IdentityServer.Identity
                     {
                         Id = userId_Admin,
                         UserName = "admin",
+                        NormalizedUserName = "admin",
                         Email = "admin@admin.com",
                         NormalizedEmail = "admin@admin.com",
                         EmailConfirmed = true,
@@ -36,12 +37,13 @@ namespace CheatPads.IdentityServer.Identity
                         LastName = "Dane",
                         DisplayName = "Aries",
                         Gender = "M",
-                        PasswordHash = "admin||0", //pwd/salt/format 
+                        PasswordHash = "Admin.1||0", //pwd/salt/format 
                     },
                     new AppUser()
                     {
                         Id = userId_Joe,
                         UserName = "john",
+                        NormalizedUserName = "john",
                         Email = "john@cheatpads.com",
                         NormalizedEmail = "john@cheatpads.com",
                         EmailConfirmed = true,
@@ -49,12 +51,13 @@ namespace CheatPads.IdentityServer.Identity
                         LastName = "Doe",
                         DisplayName = "John D",
                         Gender = "M",
-                        PasswordHash = "joe||0", //pwd/salt/format 
+                        PasswordHash = "John.1||0", //pwd/salt/format 
                     },
                     new AppUser()
                     {
                         Id = userId_Jane,
                         UserName = "jane",
+                        NormalizedUserName = "jane",
                         Email = "jane@cheatpads.com",
                         NormalizedEmail = "jane@cheatpads.com",
                         EmailConfirmed = true,
@@ -62,7 +65,7 @@ namespace CheatPads.IdentityServer.Identity
                         LastName = "Doe",
                         DisplayName = "Jane D",
                         Gender = "F",
-                        PasswordHash = "jane||0", //pwd/salt/format 
+                        PasswordHash = "Jane.1||0", //pwd/salt/format 
                     }
                 });
 

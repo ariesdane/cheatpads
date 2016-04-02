@@ -1,8 +1,33 @@
-﻿<div class="jumbotron">
-    <h1>
-        Authentication Required
-        <small>
-            Redirecting to Login Page
-        </small>
-    </h1>
+﻿<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Identity Server Login</h3>
+            </div>
+            <div class="panel-body">
+                <form>
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Username" data-bind="value: creds.username" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Password" data-bind="value: creds.password" type="password" >
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" data-bind="value: creds.remember">
+                                <i class="text-muted">Remember My Login</i>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" data-bind="click: login">Login</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+
+    </div>
 </div>
