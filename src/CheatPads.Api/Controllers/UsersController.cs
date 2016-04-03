@@ -9,7 +9,7 @@ using Microsoft.Data.Entity;
 
 namespace CheatPads.Api.Controllers
 {
-    using CheatPads.Api.Data;
+    using CheatPads.Api.Entity;
 
     [Authorize]
     [Route("api/[controller]")]

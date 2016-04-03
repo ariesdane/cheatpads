@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CheatPads.Api.Data
+namespace CheatPads.Api.Entity
 {
     public interface IAuditRecord
     {     

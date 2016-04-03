@@ -63,12 +63,12 @@ namespace CheatPads.IdentityServer
                 });
 
             services.AddIdentity<AppUser, AppRole>(options => {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 6;
-            })
-            .AddEntityFrameworkStores<IdentityDbContext>()
-            .AddUserManager<IdentityUserManager>()
-            .AddRoleManager<IdentityRoleManager>();
+                    options.Password.RequireDigit = true;
+                    options.Password.RequiredLength = 6;
+                })
+                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddUserManager<IdentityUserManager>()
+                .AddRoleManager<IdentityRoleManager>();
 
             // IdentityServer Service Hooks to Use Identity Server
             services.AddTransient<IResourceOwnerPasswordValidator, IdentityPasswordValidator>();

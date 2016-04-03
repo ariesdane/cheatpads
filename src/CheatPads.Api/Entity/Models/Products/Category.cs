@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CheatPads.Api.Data.Models
+namespace CheatPads.Api.Entity.Models
 {
     public class Category
     {

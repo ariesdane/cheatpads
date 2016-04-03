@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Data.Entity;
 
-namespace CheatPads.Api.Data.Stores
+namespace CheatPads.Api.Entity.Stores
 {
 
     public class GenericStore<TEntity> : IEntityStore<TEntity> where TEntity : class

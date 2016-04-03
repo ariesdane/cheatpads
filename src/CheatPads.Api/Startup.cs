@@ -13,9 +13,9 @@ using System.Security.Claims;
 
 namespace CheatPads.Api
 {
-    using CheatPads.Api.Data;
-    using CheatPads.Api.Data.Models;
-    using CheatPads.Api.Data.Stores;
+    using CheatPads.Api.Entity;
+    using CheatPads.Api.Entity.Models;
+    using CheatPads.Api.Entity.Stores;
 
     public class Startup
     {

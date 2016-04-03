@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CheatPads.Api.Controllers
 {
-    using CheatPads.Api.Data.Models;
-    using CheatPads.Api.Data.Stores;
+    using CheatPads.Api.Entity.Models;
+    using CheatPads.Api.Entity.Stores;
 
     [Authorize]
     [Route("api/[controller]")]

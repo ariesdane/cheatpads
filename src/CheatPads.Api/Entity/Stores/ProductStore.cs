@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Data.Entity;
-using CheatPads.Api.Data.Models;
+using CheatPads.Api.Entity.Models;
 
-namespace CheatPads.Api.Data.Stores
+namespace CheatPads.Api.Entity.Stores
 {
     public class ProductStore : GenericStore<Product>
     {

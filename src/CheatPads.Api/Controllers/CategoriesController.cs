@@ -6,8 +6,8 @@ using System.Linq;
 
 namespace CheatPads.Api.Controllers
 {
-    using CheatPads.Api.Data.Stores;
-    using CheatPads.Api.Data.Models;
+    using CheatPads.Api.Entity.Stores;
+    using CheatPads.Api.Entity.Models;
 
     [Route("api/[controller]")]
     public class CategoriesController : Controller

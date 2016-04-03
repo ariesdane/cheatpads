@@ -80,29 +80,6 @@ namespace CheatPads.IdentityServer.Configuration
                         "CheatPads.Identity",
                         "CheatPads.Wallet"
                     }
-                },
-                new Client
-                {
-                    ClientName = "CheatPads MVC Client",
-                    ClientId = "CheatPads.Clients.MVC",
-                    Flow = Flows.Implicit,
-                    RedirectUris = new List<string>
-                    {
-                        "http://localhost:2221/",
-                    },
-                    PostLogoutRedirectUris = new List<string>
-                    {
-                        "http://localhost:2221/",
-                    },
-                    AllowedScopes = new List<string>
-                    {
-                        "openid",
-                        "email",
-                        "profile",
-                        "CheatPads.Api",
-                        "CheatPads.Identity",
-                        "CheatPads.Wallet"
-                    }
                 }
             };
         }

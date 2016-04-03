@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CheatPads.Api.Data.Stores
+namespace CheatPads.Api.Entity.Stores
 {
-    using CheatPads.Api.Data.Models;
+    using CheatPads.Api.Entity.Models;
 
     public class ColorStore
     {

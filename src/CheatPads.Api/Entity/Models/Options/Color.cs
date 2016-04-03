@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CheatPads.Api.Data.Models
+namespace CheatPads.Api.Entity.Models
 {
 
     public class Color

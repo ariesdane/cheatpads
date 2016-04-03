@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Threading.Tasks;
-using CheatPads.Api.Data.Models;
+using CheatPads.Api.Entity.Models;
 
-namespace CheatPads.Api.Data
+namespace CheatPads.Api.Entity
 {
     public class ApiDbContext : DbContext
     {

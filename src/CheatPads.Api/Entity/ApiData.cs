@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using CheatPads.Api.Data.Models;
+using CheatPads.Api.Entity.Models;
 
-namespace CheatPads.Api.Data
+namespace CheatPads.Api.Entity
 {
     public static class ApiData
     {
