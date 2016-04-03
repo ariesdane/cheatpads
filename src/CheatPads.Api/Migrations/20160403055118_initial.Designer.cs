@@ -8,7 +8,7 @@ using CheatPads.Api.Data;
 namespace CheatPads.Api.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20160402065141_initial")]
+    [Migration("20160403055118_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

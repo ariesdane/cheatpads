@@ -29,13 +29,11 @@ namespace CheatPads.Api
                 }
                 else
                 {
-                    var roles = context.User.Claims.Where(x => x.Type == "role")?.Select(x => x.Value);
-                    var userName = context.User.Claims.FirstOrDefault(x => x.Type == "name")?.Value;
-                    var clientId = context.User.Claims.FirstOrDefault(x => x.Type == "client_id")?.Value;
-
-                    var identity = new System.Security.Principal.GenericIdentity(userName ?? clientId);
-
-                    context.User = new System.Security.Principal.GenericPrincipal(identity, roles.ToArray());
+                    // check for a subject, eg. user. if exist create based on user claims. Otherwise create based on client's claims.
+                    var claims = context.User.Claims;
+                    context.User = claims.Any(x => x.Type == "sub")
+                        ? context.User = new ClaimsPrincipal(new ClaimsIdentity(claims, "Federation", "name", "role"))
+                        : context.User = new ClaimsPrincipal(new ClaimsIdentity(claims, "Federation", "client_id", "client_role"));
                 }
             }
 

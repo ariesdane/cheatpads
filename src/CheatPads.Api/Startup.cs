@@ -94,18 +94,15 @@ namespace CheatPads.Api
             // security
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
             
-
-            /*
             app.UseJwtBearerAuthentication(options =>
             {
                 options.Authority = "https://localhost:44345";
                 options.Audience = "https://localhost:44345/resources";
                 options.AutomaticAuthenticate = true;
-                options.Configuration.
+                options.AutomaticChallenge = true;
             });
-            */
-
-
+            
+            /*
             app.UseIdentityServerAuthentication(options =>
             {
                 options.Authority = "https://localhost:44345";
@@ -113,10 +110,10 @@ namespace CheatPads.Api
 
                 options.AutomaticAuthenticate = true;
                 options.AutomaticChallenge = true;
-                options.NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
-                options.RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+                options.NameClaimType = "name";
+                options.RoleClaimType = "role";
             });
-
+            */
 
             app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "CheatPads.Api" });
 

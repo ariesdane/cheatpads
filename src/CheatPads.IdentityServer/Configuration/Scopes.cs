@@ -14,15 +14,32 @@
                 StandardScopes.OpenId,
                 StandardScopes.ProfileAlwaysInclude,
                 StandardScopes.EmailAlwaysInclude,
+                StandardScopes.RolesAlwaysInclude,
 
                 // API - access token will 
                 // contain roles of user
                 new Scope
                 {
                     Name = "CheatPads.Api",
-                    DisplayName = "CheatPads API Resource Scope",
+                    DisplayName = "CheatPads Store API",
                     Type = ScopeType.Resource,
-                    IncludeAllClaimsForUser = true    
+                    IncludeAllClaimsForUser = true,
+                    Required = true
+                },
+                new Scope
+                {
+                    Name = "CheatPads.Identity",
+                    DisplayName = "CheatPads Identity Api",
+                    Type = ScopeType.Identity,
+                    IncludeAllClaimsForUser = true,
+                    Required = true
+                },
+                new Scope
+                {
+                    Name = "CheatPads.Wallet",
+                    DisplayName = "CheatPads Wallet Api",
+                    Type = ScopeType.Resource,
+                    IncludeAllClaimsForUser = true,
                 }
             };
         }

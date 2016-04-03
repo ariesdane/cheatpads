@@ -1,9 +1,11 @@
-﻿namespace CheatPads.IdentityServer.Configuration
+﻿using IdentityModel;
+using System.Collections.Generic;
+using System.Security.Claims;
+using IdentityServer4.Core.Models;
+
+
+namespace CheatPads.IdentityServer.Configuration
 {
-    using System.Collections.Generic;
-
-    using IdentityServer4.Core.Models;
-
     public class Clients
     {
         public static List<Client> Get()
@@ -30,7 +32,9 @@
                         "openid",
                         "email",
                         "profile",
-                        "CheatPads.Api"
+                        "CheatPads.Api",
+                        "CheatPads.Identity",
+                        "CheatPads.Wallet"
                     }
                 },
                 new Client
@@ -41,6 +45,10 @@
                     {
                         new Secret("D7014A72BB75E3C".Sha256())
                     },
+                    Claims = new List<Claim>()
+                    {
+                        new Claim(JwtClaimTypes.Role, "TrustedApps")
+                    },
                     Flow = Flows.ClientCredentials,
                     AllowClientCredentialsOnly = true,
                     AllowAccessToAllCustomGrantTypes = true,
@@ -49,7 +57,9 @@
                         "openid",
                         "email",
                         "profile",
-                        "CheatPads.Api"
+                        "CheatPads.Api",
+                        "CheatPads.Identity",
+                        "CheatPads.Wallet"
                     }
                 },
                 new Client
@@ -66,7 +76,9 @@
                         "openid",
                         "email",
                         "profile",
-                        "CheatPads.Api"
+                        "CheatPads.Api",
+                        "CheatPads.Identity",
+                        "CheatPads.Wallet"
                     }
                 },
                 new Client
@@ -87,7 +99,9 @@
                         "openid",
                         "email",
                         "profile",
-                        "CheatPads.Api"
+                        "CheatPads.Api",
+                        "CheatPads.Identity",
+                        "CheatPads.Wallet"
                     }
                 }
             };
