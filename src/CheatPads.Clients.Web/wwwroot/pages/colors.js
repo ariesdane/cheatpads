@@ -1,10 +1,10 @@
-﻿define(["ko", "ajax"], function (ko, ajax) {
+﻿define(["ko", "ajax", "config"], function (ko, ajax, config) {
     var model = {};
     
     model.colors = ko.observableArray();
     
     model.init = function () {
-        ajax.get("colors").done(function (data) {
+        ajax.get(config.apis.ecomm + "/colors").done(function (data) {
             model.colors(data);
         });
     }

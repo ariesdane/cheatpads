@@ -47,9 +47,15 @@ define(["ko", "system", "storage", "ajax", "auth", "config"], function (ko, syst
         }
     })
 
-    // api root
-    ajax.setBaseUrl(config.api.baseUrl);
+    // storefront ecommerce api
+    ajax.addApi("ecomm", config.apis.ecomm);
+
+    // users api on identity server
+    ajax.addApi("users", config.apis.users);
    
+    // secure wallet api
+    ajax.addApi("wallet", config.apis.wallet);
+
     // must call apply bindings for ko to bind widgets 
     ko.applyBindings({});
     system.log("Bindings Ok");

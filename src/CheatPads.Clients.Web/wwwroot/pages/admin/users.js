@@ -8,11 +8,11 @@
     });
 
     model.init = function () {
-        ajax.get("users").as(model.users);
+        ajax.users.get("users").as(model.users);
     }
 
     model.select = function (data) {
-        ajax.get("users", data.id).done(function (user) {
+        ajax.users.get("users", data.id).done(function (user) {
             model.user(user);
         });
     }

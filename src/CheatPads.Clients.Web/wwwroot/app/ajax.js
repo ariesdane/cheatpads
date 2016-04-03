@@ -1,24 +1,16 @@
 ﻿define(['jquery'], function ($) {
-    var _baseUrl = "",
-        _interceptors = [
-            //{
-            //    request: fn // intercept all requests
-            //    response: fn, // intercept all error responses
-            //    error: fn,   // intercept all error responses
-            //    success: fn, // intercept all successful responses
-            //    401: fn      // intercept 401 responses 
-            //}
-        ];
-        
-    
-    var _url = function (path, id) {
+    // exported model
+    var _AJAX = {};
+           
+    // private
+    function _url (url, path, id) {
         if (path.slice(-1) == "/") path = path.slice(0, -1);
-        if (!/http/i.test(path)) path = _baseUrl + "/" + path;
+        if (!/http/i.test(path)) path = (url || "") + "/" + path;
         if (id !== undefined) path += "/" + id;
         return path;
     }
 
-    var _queryString = function (data) {
+    function _queryString (data) {
         if (typeof data === 'object') {
             var parts = [], key, val;
             for (key in data) {
@@ -30,14 +22,14 @@
         return "";
     }
 
-    var _ajax = function (options) {
+    function _ajax(options) {
         var task = $.Deferred(),
             promise = task.promise(),
             error_fn = options.error,
             success_fn = options.success;
 
         function applyInterceptors(scopes, args) {
-            _interceptors.forEach(function (intercepetor) {
+            _AJAX.interceptors.forEach(function (intercepetor) {
                 scopes.forEach(function (scope) {
                     if (typeof intercepetor[scope] === "function") {
                         intercepetor[scope].apply(options, args);
@@ -64,30 +56,47 @@
         return $.extend(promise, { as: promise.done });
     };
 
-    
-    return {   
-        ajax: _ajax,
-        get: function (path, id, query) {
-            if (typeof id === "object") {
-                query = id;
-                id = undefined;
+
+    // public
+    _AJAX.addApi = function(apiName, baseUrl) {
+        var methods = {
+            get: function (path, id, query) {
+                if (typeof id === "object") {
+                    query = id;
+                    id = undefined;
+                }
+                return _ajax({ url: _url(baseUrl, path, id) + _queryString(query), type: "GET" });
+            },
+            post: function (path, data) {
+                return _ajax({ url: _url(baseUrl, path), data: data, type: "POST" });
+            },
+            put: function (path, id, data) {
+                return _ajax({ url: _url(baseUrl, path, id), data: data, type: "PUT" });
+            },
+            delete: function (path, id) {
+                return _ajax({ url: _url(baseUrl, path, id), type: "DELETE" });
             }
-            return _ajax({ url: _url(path, id) + _queryString(query), type: "GET" });
-        },
-        post: function (path, data) {
-            return _ajax({ url: _url(path), data: data, type: "POST", headers: {'Content-Type': 'application/x-www-form-urlencoded'} });
-        },
-        put: function (path, id, data) {
-            return _ajax({ url: _url(path, id), data: data, type: "PUT" });
-        },       
-        delete: function (path, id) {
-            return _ajax({ url: _url(path, id), type: "DELETE" });
-        },       
-        interceptors: _interceptors,
-        
-        setBaseUrl: function (baseUrl) {
-            _baseUrl = baseUrl;
+        };
+        if (apiName) {
+            _AJAX[apiName] = methods;
+        }
+        else{
+            $.extend(_AJAX, methods);
         }
     }
 
+    _AJAX.interceptors = [
+            //{
+            //    request: fn // intercept all requests
+            //    response: fn, // intercept all error responses
+            //    error: fn,   // intercept all error responses
+            //    success: fn, // intercept all successful responses
+            //    401: fn      // intercept 401 responses 
+            //}
+    ];
+
+    // preloading generic ajax methods to model root
+    _AJAX.addApi();
+    
+    return _AJAX;
 });

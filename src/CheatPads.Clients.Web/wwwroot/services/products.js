@@ -1,16 +1,16 @@
 ﻿define(["ajax"], function (ajax) {
     return {     
         getAll: function(){
-            return ajax.get("products");
+            return ajax.ecomm.get("products");
         },
         getDetails: function(sku){
-            return ajax.get("products", sku);
+            return ajax.ecomm.get("products", sku);
         },
         getByCategory: function(name){
-            return ajax.get("products/cat", name);
+            return ajax.ecomm.get("products/cat", name);
         },
         getCategories: function(){
-            return ajax.get("categories");
+            return ajax.ecomm.get("categories");
         }
     }
 });

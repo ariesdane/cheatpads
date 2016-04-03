@@ -8,13 +8,13 @@
     });
 
     model.init = function () {
-        ajax.get("products").done(function (data) {
+        ajax.ecomm.get("products").done(function (data) {
             model.products(data);
         });
     }
 
     model.select = function (data) {
-        ajax.get("products", data.sku).done(function (item) {
+        ajax.ecomm.get("products", data.sku).done(function (item) {
             model.product(item);
         });
     }

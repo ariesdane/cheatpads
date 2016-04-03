@@ -1,8 +1,10 @@
 ﻿define({
     startPage: "#home",
     pageHost: ".page-host",
-    api: {
-        baseUrl: "https://localhost:44390/api",
+    apis: {
+        ecomm: "http://localhost:2716/api",
+        users: "https://localhost:44390/api",
+        wallet: "https://localhost:44390/api",
     },
     auth: {
         loginUrl: "https://localhost:44345/connect/authorize",
@@ -10,7 +12,7 @@
         loginUrlReturn: "http://localhost:61739/",
         logoutUrlReturn: "http://localhost:61739/",
         clientId: "CheatPads.Clients.Web",
-        scope: "CheatPads.Api",
+        scope: "CheatPads.Api CheatPads.Wallet",
         responseType: "token"
     },
     routes: [
