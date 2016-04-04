@@ -3,5 +3,14 @@
     "Development": {
       "SqlServerConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=CheatPads.Data;Integrated Security=True"
     }
+  },
+  "Security": {
+    "Authority": "https://localhost:44345",
+    "Audience": "https://localhost:44345/resources",
+    "ResourceScope": "CheatPads.Api",
+    "TrustedClients": [
+      "localhost:61739",
+      "localhost:44327"
+    ]
   }
 }

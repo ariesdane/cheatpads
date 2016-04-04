@@ -34,6 +34,16 @@ namespace CheatPads.Clients.Console.Services
             return HttpGetArray(Settings.ColorsEndpoint, setToken: true);
         }
 
+        public static JObject GetColor(string id)
+        {
+            return HttpGetObject(Settings.ColorsEndpoint + "/" + id, setToken: true);
+        }
+
+        public static string CreateColor(string name, string hex)
+        {
+            return HttpPost(Settings.ColorsEndpoint, new { Name = name, Hex = hex }, setToken: true);
+        }
+
         public static JObject GetUserPrinciple()
         {
             return HttpGetObject(Settings.UsersEndpoint + "/current", setToken: true);
@@ -44,12 +54,11 @@ namespace CheatPads.Clients.Console.Services
             return HttpGetArray(Settings.UsersEndpoint, setToken: true);
         }
 
-
         private static JArray HttpGetArray(string uri, bool setToken = false)
         {
             var client = new HttpClient();
 
-            if(setToken)
+            if (setToken)
             {
                 client.SetBearerToken(TokenService.CurrentTokenData?.AccessToken);
             }
@@ -69,6 +78,25 @@ namespace CheatPads.Clients.Console.Services
             string response = client.GetStringAsync(uri).Result;
 
             return JObject.Parse(response);
+        }
+
+        private static string HttpPost(string uri, dynamic data, bool setToken = false)
+        {
+            var client = new HttpClient();
+            var content = new StringContent(
+                Newtonsoft.Json.JsonConvert.SerializeObject(data),
+                System.Text.UTF8Encoding.UTF8,
+                "application/json"
+            );
+
+            if (setToken)
+            {
+                client.SetBearerToken(TokenService.CurrentTokenData?.AccessToken);
+            }
+          
+            HttpResponseMessage response = client.PostAsync(uri, content).Result;
+
+            return response.ToString();
         }
 
     }

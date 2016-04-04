@@ -23,7 +23,9 @@ namespace CheatPads.Clients.Console
             CommandManager.RegisterCommand(new GetProductDetailsCommand());
             CommandManager.RegisterCommand(new GetProductsByCategoryCommand());
             CommandManager.RegisterCommand(new GetCategoriesCommand());
-            CommandManager.RegisterCommand(new GetColorsCommand());         
+            CommandManager.RegisterCommand(new GetColorsCommand());
+            CommandManager.RegisterCommand(new GetColorDetailsCommand());
+            CommandManager.RegisterCommand(new CreateColorCommand());
             CommandManager.RegisterCommand(new ExitAppCommand());
             CommandManager.ShowCommandMenu();
         }

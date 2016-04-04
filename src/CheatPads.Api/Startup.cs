@@ -5,21 +5,24 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.OptionsModel;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
+
 namespace CheatPads.Api
 {
+    using CheatPads.Api.Configuration;
     using CheatPads.Api.Entity;
     using CheatPads.Api.Entity.Models;
     using CheatPads.Api.Entity.Stores;
 
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfigurationRoot _config { get; set; }
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment environment)
         {
@@ -27,7 +30,7 @@ namespace CheatPads.Api
                 .SetBasePath(environment.ApplicationBasePath)
                 .AddJsonFile("config.json");
 
-            Configuration = builder.Build();
+            _config = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -36,7 +39,7 @@ namespace CheatPads.Api
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<ApiDbContext>(options => {
-                    options.UseSqlServer(Configuration["Data:Development:SqlServerConnectionString"]);
+                    options.UseSqlServer(_config["Data:Development:SqlServerConnectionString"]);
                 });
 
             services.AddScoped<IEntityStore<Product>, ProductStore>();
@@ -65,7 +68,16 @@ namespace CheatPads.Api
                 options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
             });
 
+            services.AddSingleton<IConfigurationRoot>(c => _config);
+            services.Configure<SecurityConfig>(_config.GetSection("Security"));
+
             // security
+            services.AddAuthorization(options => {
+                var serviceProvider = services.BuildServiceProvider();
+                options.AddPolicy("TrustedClients", p =>
+                    p.AddRequirements(new TrustedClientRequirement(serviceProvider))
+                );
+            });
             services.AddTransient<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
         }
 
@@ -90,32 +102,24 @@ namespace CheatPads.Api
             app.UseIISPlatformHandler();
             app.UseCors("corsGlobalPolicy");
             app.UseStaticFiles();
-            
+
+
             // security
+            var securityConfig = app.ApplicationServices.GetService<IOptions<SecurityConfig>>().Value;
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
             
             app.UseJwtBearerAuthentication(options =>
             {
-                options.Authority = "https://localhost:44345";
-                options.Audience = "https://localhost:44345/resources";
+                options.Authority = securityConfig.Authority;
+                options.Audience = securityConfig.Audience;
                 options.AutomaticAuthenticate = true;
                 options.AutomaticChallenge = true;
             });
-            
-            /*
-            app.UseIdentityServerAuthentication(options =>
-            {
-                options.Authority = "https://localhost:44345";
-                options.ScopeName = "CheatPads.Api";
 
-                options.AutomaticAuthenticate = true;
-                options.AutomaticChallenge = true;
-                options.NameClaimType = "name";
-                options.RoleClaimType = "role";
+            app.UseMiddleware<RequiredScopesMiddleware>(new List<string> {
+                securityConfig.ResourceScope
             });
-            */
-
-            app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "CheatPads.Api" });
 
             // routing
             app.UseMvcWithDefaultRoute();    
