@@ -1,3 +1,4 @@
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
@@ -68,16 +69,18 @@ namespace CheatPads.Api
                 options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
             });
 
-            services.AddSingleton<IConfigurationRoot>(c => _config);
-            services.Configure<SecurityConfig>(_config.GetSection("Security"));
+            //services.AddSingleton<IConfigurationRoot>(c => _config);
 
             // security
-            services.AddAuthorization(options => {
-                var serviceProvider = services.BuildServiceProvider();
-                options.AddPolicy("TrustedClients", p =>
-                    p.AddRequirements(new TrustedClientRequirement(serviceProvider))
-                );
-            });
+            services.Configure<SecurityConfig>(_config.GetSection("Security"));
+
+            services.AddAuthorization(options =>
+                options.AddPolicy("TrustedClients", p => {
+                    p.AddRequirements(new TrustedClientRequirement());
+                })
+            );
+
+            services.AddSingleton<IAuthorizationHandler, TrustedClientHandler>();
             services.AddTransient<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
         }
 
@@ -117,9 +120,7 @@ namespace CheatPads.Api
                 options.AutomaticChallenge = true;
             });
 
-            app.UseMiddleware<RequiredScopesMiddleware>(new List<string> {
-                securityConfig.ResourceScope
-            });
+            app.UseMiddleware<RequiredScopesMiddleware>(securityConfig);
 
             // routing
             app.UseMvcWithDefaultRoute();    

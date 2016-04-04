@@ -5,9 +5,12 @@
     }
   },
   "Security": {
+    "AuthenticationType":  "Federation",
     "Authority": "https://localhost:44345",
     "Audience": "https://localhost:44345/resources",
-    "ResourceScope": "CheatPads.Api",
+    "RequiredScopes": [
+      "CheatPads.Api"
+    ],
     "TrustedClients": [
       "localhost:61739",
       "localhost:44327"

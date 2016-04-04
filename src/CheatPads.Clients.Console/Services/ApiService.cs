@@ -85,7 +85,7 @@ namespace CheatPads.Clients.Console.Services
             var client = new HttpClient();
             var content = new StringContent(
                 Newtonsoft.Json.JsonConvert.SerializeObject(data),
-                System.Text.UTF8Encoding.UTF8,
+                System.Text.Encoding.UTF8,
                 "application/json"
             );
 

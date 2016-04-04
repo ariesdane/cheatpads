@@ -36,14 +36,14 @@ namespace CheatPads.Api.Entity.Stores
             return _colors.FirstOrDefault(x => x.Id == id);
         }
 
-        public bool Add(Color color)
+        public int Add(Color color)
         {
             if (!_colors.Exists(x => x.Name.ToLower() == color.Name.ToLower()))
             {
                 color.Id = _colors.Max(x => x.Id) + 1;
                 _colors.Add(color);
             }
-            return false;
+            return color.Id;
         }
 
         public bool Update(int id, string name, string hex)

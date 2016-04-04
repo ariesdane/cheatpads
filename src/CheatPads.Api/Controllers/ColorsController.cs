@@ -11,7 +11,7 @@ namespace CheatPads.Api.Controllers
     using CheatPads.Api.Entity.Models;
     using CheatPads.Api.Entity.Stores;
 
-    [Authorize(Policy = "TrustedClients")]
+    //[Authorize(Policy = "TrustedClients")]
     [Route("api/[controller]")]
     public class ColorsController : Controller
     {
@@ -39,7 +39,7 @@ namespace CheatPads.Api.Controllers
 
         // POST api/colors
         [HttpPost]
-        public bool Post(Color color)
+        public int Post(Color color)
         {
             return _colorStore.Add(color);
         }

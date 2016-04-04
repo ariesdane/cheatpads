@@ -9,7 +9,22 @@
             <!--ko text: name--><!--/ko-->
         </li>
     </ul>
-    <div class="panel-footer">
-        <code></code>
-    </div>
+    <div class="panel-footer"></div>
 </div>
+<br />
+
+<h3>Create New Color</h3>
+<form class="form form-inline">
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="Color Name" data-bind="value: color.name" style="width: 100%"/>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="Hex Value" data-bind="value: color.hex" style="width: 100%" />
+    </div>
+    <div class="col-sm-4 text-right">
+        <button class="btn btn-default" data-bind="click: addColor">Add</button>
+    </div>
+</form>
+<div class="clearfix"></div>
+<br />
+<br />

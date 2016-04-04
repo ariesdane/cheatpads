@@ -7,12 +7,14 @@ namespace CheatPads.Api.Configuration
 {
     public class SecurityConfig
     {
+        public string AuthenticationType { get; set; }
+
         public string Authority { get; set; }
 
         public string Audience { get; set; }
 
-        public string ResourceScope { get; set; }
+        public List<string> RequiredScopes { get; set; }
 
-        public string[] TrustedClients { get; set; }
+        public List<string> TrustedClients { get; set; }
     }
 }
