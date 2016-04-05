@@ -30,7 +30,7 @@ namespace CheatPads.Api.Controllers
             return this.User;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize(Roles = "Administrators")]
         public dynamic Get(string id)
         {
             var command = _dbContext.Database.GetDbConnection().CreateCommand();

@@ -5,7 +5,7 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.ChangeTracking;
 using Microsoft.Data.Entity.Infrastructure;
 
-namespace CheatPads.Api.Entity
+namespace CheatPads.Framework.Entity
 {
     public static class DbSetExtensions
     {

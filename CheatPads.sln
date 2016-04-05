@@ -8,7 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{68FE7151-CB27-498E-8FC3-DB0EB76BED8A}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
-		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.Api", "src\CheatPads.Api\CheatPads.Api.xproj", "{27CE53A6-EEEF-4CC8-A463-6915A5F3AFEA}"
@@ -18,6 +17,10 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.IdentityServer", "src\CheatPads.IdentityServer\CheatPads.IdentityServer.xproj", "{BDA03321-C60F-4A32-9D34-882DFEE9C3E7}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.Clients.Console", "src\CheatPads.Clients.Console\CheatPads.Clients.Console.xproj", "{AB38BFAD-C168-4D4D-9055-EE409C2E73A7}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CheatPads.Framework", "src\CheatPads.Framework\CheatPads.Framework.xproj", "{2BEA07C3-06BA-4EDC-80B8-81992197D21B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{BB43F591-E817-4C6B-89E5-7332185AA37A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +44,20 @@ Global
 		{AB38BFAD-C168-4D4D-9055-EE409C2E73A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB38BFAD-C168-4D4D-9055-EE409C2E73A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB38BFAD-C168-4D4D-9055-EE409C2E73A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BEA07C3-06BA-4EDC-80B8-81992197D21B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEA07C3-06BA-4EDC-80B8-81992197D21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEA07C3-06BA-4EDC-80B8-81992197D21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEA07C3-06BA-4EDC-80B8-81992197D21B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30} = {BB43F591-E817-4C6B-89E5-7332185AA37A}
+		{27CE53A6-EEEF-4CC8-A463-6915A5F3AFEA} = {BB43F591-E817-4C6B-89E5-7332185AA37A}
 		{6982052D-04E1-4C0B-BAA4-F0D94299D395} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
+		{BDA03321-C60F-4A32-9D34-882DFEE9C3E7} = {BB43F591-E817-4C6B-89E5-7332185AA37A}
 		{AB38BFAD-C168-4D4D-9055-EE409C2E73A7} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
+		{2BEA07C3-06BA-4EDC-80B8-81992197D21B} = {BB43F591-E817-4C6B-89E5-7332185AA37A}
 	EndGlobalSection
 EndGlobal

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CheatPads.Api.Extensions
+namespace CheatPads.Framework.Extensions
 {
     public static class CollectionExtensions
     {

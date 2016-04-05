@@ -175,7 +175,7 @@ em, .text-muted {
     position: relative;
     z-index: 1100;
     display: block;
-    animation: rotate-in 200ms linear;
+    animation: fade-in 150ms ease-in;
     top: 90px;
 }
 

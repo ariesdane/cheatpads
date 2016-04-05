@@ -16,10 +16,8 @@ using System.Security.Claims;
 
 namespace CheatPads.Api
 {
-    using CheatPads.Api.Configuration;
+    using CheatPads.Api.Security;
     using CheatPads.Api.Entity;
-    using CheatPads.Api.Entity.Models;
-    using CheatPads.Api.Entity.Stores;
 
     public class Startup
     {
@@ -43,25 +41,22 @@ namespace CheatPads.Api
                     options.UseSqlServer(_config["Data:Development:SqlServerConnectionString"]);
                 });
 
-            services.AddScoped<IEntityStore<Product>, ProductStore>();
-            services.AddScoped<IEntityStore<Category>, CategoryStore>();
+            services.AddScoped<Entity.Stores.ProductStore>();
+            services.AddScoped<Entity.Stores.CategoryStore>();
+            services.AddScoped<Entity.Stores.ColorStore>();
 
-            services.AddScoped<ProductStore>();
-            services.AddScoped<CategoryStore>();
-            services.AddScoped<ColorStore>();
+            // hosting          
+            services.AddCors(x => {
+                var policy = new Microsoft.AspNet.Cors.Infrastructure.CorsPolicy();
 
-            //services.AddScoped<IRepository<UserDocument>, UserDocumentRepository>();
+                policy.Headers.Add("*");
+                policy.Methods.Add("*");
+                policy.Origins.Add("*");
+                policy.SupportsCredentials = true;
 
-            // hosting
-            var policy = new Microsoft.AspNet.Cors.Infrastructure.CorsPolicy();
+                x.AddPolicy("corsGlobalPolicy", policy);
+            });
 
-            services.AddCors();
-            policy.Headers.Add("*");
-            policy.Methods.Add("*");
-            policy.Origins.Add("*");
-            policy.SupportsCredentials = true;
-
-            services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -69,19 +64,14 @@ namespace CheatPads.Api
                 options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
             });
 
-            //services.AddSingleton<IConfigurationRoot>(c => _config);
-
             // security
             services.Configure<SecurityConfig>(_config.GetSection("Security"));
+            services.AddTransient<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
+            services.AddSingleton<IAuthorizationHandler, TrustedWebClientHandler>();
 
             services.AddAuthorization(options =>
-                options.AddPolicy("TrustedClients", p => {
-                    p.AddRequirements(new TrustedClientRequirement());
-                })
-            );
-
-            services.AddSingleton<IAuthorizationHandler, TrustedClientHandler>();
-            services.AddTransient<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
+                options.AddPolicy("TrustedClients", p => p.AddRequirements(new TrustedWebClientRequirement()))
+            );    
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
@@ -108,8 +98,7 @@ namespace CheatPads.Api
 
 
             // security
-            var securityConfig = app.ApplicationServices.GetService<IOptions<SecurityConfig>>().Value;
-
+            SecurityConfig securityConfig = app.ApplicationServices.GetService<IOptions<SecurityConfig>>().Value;
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
             
             app.UseJwtBearerAuthentication(options =>

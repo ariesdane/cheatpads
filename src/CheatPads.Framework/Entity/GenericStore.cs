@@ -2,13 +2,14 @@
 using System.Linq;
 using Microsoft.Data.Entity;
 
-namespace CheatPads.Api.Entity.Stores
+namespace CheatPads.Framework.Entity
 {
+    using CheatPads.Framework.Extensions;
 
     public class GenericStore<TEntity> : IEntityStore<TEntity> where TEntity : class
     {
-        internal DbContext dbContext;
-        internal DbSet<TEntity> dbSet;
+        protected DbContext dbContext;
+        protected DbSet<TEntity> dbSet;
        
         /// <summary>
         /// Base constructor for initializing the DataStore class

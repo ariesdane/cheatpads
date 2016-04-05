@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 using Newtonsoft.Json;
 
-namespace CheatPads.Api
+namespace CheatPads.Framework.Extensions
 {
     public static class TypeExtensions
     {      

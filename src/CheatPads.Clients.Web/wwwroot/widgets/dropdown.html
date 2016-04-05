@@ -1,2 +1,14 @@
-﻿<i data-bind="attr: { class: cssClass }" title="$componentTemplateNodes"></i>
-<!-- ko template: { nodes: $componentTemplateNodes, data: {} } --><!--/ko-->
+﻿<div class="dropdown" data-bind="class: { disabled: disabled }">
+    <button class="btn btn-default" data-bind="click: toggle">
+        <!--ko text: label --><!--/ko--> &nbsp;
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" data-bind="foreach: options">
+    <!--ko ifnot: $data === null -->
+        <li><a data-bind="text: $parent.getOptionText($data), click: $parent.select"></a></li>
+    <!--/ko-->
+    <!--ko if: $data === null -->
+        <li class="divider"></li>
+    <!--/ko-->
+    </ul>
+</div>

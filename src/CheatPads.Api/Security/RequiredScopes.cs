@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CheatPads.Api
 {
-    using CheatPads.Api.Configuration;
+    using CheatPads.Api.Security;
 
     public class RequiredScopesMiddleware
     {

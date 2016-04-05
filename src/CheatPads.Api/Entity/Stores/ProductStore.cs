@@ -5,6 +5,8 @@ using CheatPads.Api.Entity.Models;
 
 namespace CheatPads.Api.Entity.Stores
 {
+    using CheatPads.Framework.Entity;
+
     public class ProductStore : GenericStore<Product>
     {
         public ProductStore(ApiDbContext context) : base(context)

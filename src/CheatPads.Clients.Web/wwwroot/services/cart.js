@@ -11,7 +11,7 @@
     model.cost = ko.computed(function () {
         var cost = 0;
         model.items().forEach(function (item) {
-            cost += parseFloat(item.price.replace(/[^0-9\.]/g, ''));
+            cost += parseFloat(item.price);
         });
         return cost;
     });

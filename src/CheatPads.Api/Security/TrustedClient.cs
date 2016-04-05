@@ -5,21 +5,21 @@ using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 
-namespace CheatPads.Api.Configuration
+namespace CheatPads.Api.Security
 {
-    using CheatPads.Api.Extensions;
+    using CheatPads.Framework.Extensions;
 
-     public class TrustedClientHandler : AuthorizationHandler<TrustedClientRequirement>
+     public class TrustedWebClientHandler : AuthorizationHandler<TrustedWebClientRequirement>
      {
 
         private SecurityConfig _config;
 
-        public TrustedClientHandler(IOptions<SecurityConfig> config)
+        public TrustedWebClientHandler(IOptions<SecurityConfig> config)
         {
             _config = config.Value;
         }
 
-        protected override void Handle(AuthorizationContext context, TrustedClientRequirement requirement)
+        protected override void Handle(AuthorizationContext context, TrustedWebClientRequirement requirement)
         {
             var resourceContext = context.Resource as Microsoft.AspNet.Mvc.Filters.AuthorizationContext;
 
@@ -34,7 +34,7 @@ namespace CheatPads.Api.Configuration
         }
     }
 
-    public class TrustedClientRequirement : IAuthorizationRequirement {
+    public class TrustedWebClientRequirement : IAuthorizationRequirement {
 
         public bool Validate(HttpContext context, SecurityConfig config)
         {

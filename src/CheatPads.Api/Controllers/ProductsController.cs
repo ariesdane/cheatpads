@@ -8,6 +8,7 @@ namespace CheatPads.Api.Controllers
 {
     using CheatPads.Api.Entity.Stores;
     using CheatPads.Api.Entity.Models;
+    using CheatPads.Framework.Extensions;
 
     [Route("api/[controller]")]
     public class ProductsController : Controller

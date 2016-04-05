@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace CheatPads.Api.Entity.Stores
+namespace CheatPads.Framework.Entity
 {
     public interface IEntityStore<T>
     {
