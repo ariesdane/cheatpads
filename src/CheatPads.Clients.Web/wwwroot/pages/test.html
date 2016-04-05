@@ -1,29 +1,26 @@
 ﻿<p>
-    <div class="row well">
-        <div class="col-md-10">
-            <div class="row">
-                <strong class="col-md-1">
-                    Filter:
-                </strong>
-                <div class="col-md-3">
-                    <span>State: </span>
-                    <select data-bind="options: states, value: filterState, valueAllowUnset: true"></select>
-                    <dropdown params="{label: 'State', options: ['liquid', 'solid', null, 'eggs', 'ham'] }"></dropdown>
-                </div>
-                <div class="col-md-3">
-                    <span>Bond: </span>
-                    <select data-bind="options: bonds, value: filterBond, valueAllowUnset: true"></select>
-                </div>
-                <div class="col-md-3">
-                    <span>Group: </span>
-                    <select data-bind="options: groups, value: filterGroup, valueAllowUnset: true"></select>
-                </div>
-            </div>
+
+
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <label>
+                <i class="glyphicon glyphicon-filter"></i>
+                Filter
+            </label>
         </div>
-        <div class="col-md-2 text-right">
-            <a data-bind="click: clearFilter">
+        <div class="btn-group">
+            <dropdown params="{label: 'Group', options: groups, value: filterGroup }"></dropdown>
+        </div>
+        <div class="btn-group">
+            <dropdown params="{label: 'Bond Type', options: bonds, value: filterBond }"></dropdown>
+        </div>
+        <div class="btn-group">
+            <dropdown params="{label: 'State', options: states, value: filterState }"></dropdown>
+        </div>
+        <div class="btn-group pull-right">
+            <btn class="btn btn-default" data-bind="click: clearFilter">
                 Clear Filter
-            </a>
+            </btn>
         </div>
     </div>
 </p>

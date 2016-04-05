@@ -1,6 +1,6 @@
-﻿<div class="dropdown" data-bind="class: { disabled: disabled }">
-    <button class="btn btn-default" data-bind="click: toggle">
-        <!--ko text: label --><!--/ko--> &nbsp;
+﻿<div class="dropdown" data-bind="css: { open: open, disabled: disabled }">
+    <button class="btn btn-default" data-bind="click: toggle, attr: { disabled: disabled }">
+        <span data-bind="text: label"></span> &nbsp;
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" data-bind="foreach: options">

@@ -1,36 +1,44 @@
-﻿define(["jquery"], function ($) {
-    function toggleEvent(event) {
-        var $el = $(event.currentTarget).parents(".dropdown:first"),
-            className = "open";
+﻿define(["jquery", "ko"], function ($, ko) {
+     return function (params) {
+         var widget = this;
 
-        $el.hasClass(className)
-            ? $el.removeClass(className)
-            : $el.addClass(className);
-    }
+         widget.options = params.options || [];
+         widget.disabled = params.disabled || false;
+         widget.open = ko.observable(false);
 
-    return function (params) {
-        this.label = params.label || "Dropdown";
-        this.options = params.options || [];
+         if (ko.isObservable(params.value)) {
+             widget.value = params.value;
+             params.syncLabel = params.syncLabel !== false;
+         }
+         else {
+             widget.value = ko.observable(params.value);
+         }      
 
-        this.getOptionText = function (item) {
+        widget.label = ko.pureComputed(function () {
+            return widget.value() && params.syncLabel
+                ? widget.getOptionText(widget.value())
+                : ko.unwrap(params.label);
+        });
+
+        
+        widget.getOptionText = function (item) {
             if (typeof item == "object") {
                 return item[params.optionTextField] || item["name"] || item["title"];
             }
             return item;
         }
 
-        this.toggle = function (data, event) {
-            toggleEvent(event);
-        }
+        widget.select = function (item) {
+            widget.value(item);
+            widget.open(false);
 
-        this.select = function (item, event) {
             if(typeof params.select === "function"){
                 params.select(item);
             }
-            toggleEvent(event);
+        }
+
+        widget.toggle = function () {
+            widget.open(!widget.open());
         }
     }
-
-
-
 });

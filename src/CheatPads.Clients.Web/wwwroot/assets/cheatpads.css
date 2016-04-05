@@ -81,6 +81,24 @@ a:hover, .btn:hover {
     border-color: #ddd;
 }
 
+.btn-toolbar {
+    padding: 6px 0;
+    background: #f7f7f7;
+    border-top: 1px #ddd solid;
+    border-bottom: 1px #ddd solid;
+}
+
+.btn-group > label {
+    float: left;
+    margin: 0 20px 0 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #aaa;
+    font-size: 14px;
+    line-height: 35px;
+    vertical-align: middle;
+}
+
 .btn:hover {
     background: #eaeaea;
 }
