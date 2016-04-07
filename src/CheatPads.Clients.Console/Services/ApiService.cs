@@ -54,7 +54,7 @@ namespace CheatPads.Clients.Console.Services
             return HttpGetArray(Settings.UsersEndpoint, setToken: true);
         }
 
-        private static JArray HttpGetArray(string uri, bool setToken = false)
+        private static JArray HttpGetArray(string uri, bool setToken = true)
         {
             var client = new HttpClient();
 
@@ -67,7 +67,7 @@ namespace CheatPads.Clients.Console.Services
             return JArray.Parse(response);
         }
 
-        private static JObject HttpGetObject(string uri, bool setToken = false)
+        private static JObject HttpGetObject(string uri, bool setToken = true)
         {
             var client = new HttpClient();
 
@@ -80,7 +80,7 @@ namespace CheatPads.Clients.Console.Services
             return JObject.Parse(response);
         }
 
-        private static string HttpPost(string uri, dynamic data, bool setToken = false)
+        private static string HttpPost(string uri, dynamic data, bool setToken = true)
         {
             var client = new HttpClient();
             var content = new StringContent(

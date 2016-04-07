@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Data.Entity;
-using CheatPads.Api.Entity.Models;
+
 
 namespace CheatPads.Api.Entity.Stores
 {
     using CheatPads.Framework.Entity;
+    using CheatPads.Api.Entity.Models;
 
     public class CategoryStore : GenericStore<Category>
     {

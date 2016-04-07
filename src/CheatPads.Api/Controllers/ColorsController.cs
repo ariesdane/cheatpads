@@ -16,7 +16,7 @@ namespace CheatPads.Api.Controllers
     public class ColorsController : Controller
     {
 
-        private ColorStore _colorStore = new ColorStore();
+        private ColorStore _colorStore;
 
         public ColorsController(ColorStore colorStore)
         {
@@ -27,7 +27,7 @@ namespace CheatPads.Api.Controllers
         [HttpGet]
         public IEnumerable<Color> Get()
         {
-            return _colorStore.Get();
+            return _colorStore.List();
         }
 
         // GET api/colors/5
@@ -41,14 +41,17 @@ namespace CheatPads.Api.Controllers
         [HttpPost]
         public int Post(Color color)
         {
-            return _colorStore.Add(color);
+            var result = _colorStore.Create(color);
+            _colorStore.DbContext.SaveChanges();
+            return result.Id;
         }
 
         // PUT api/colors/5
         [HttpPut("{id}")]
-        public bool Put(int id, [FromBody]string name, [FromBody]string hex)
+        public bool Put(int id, string name, string hex)
         {
-            return _colorStore.Update(id, name, hex);
+            var color = new Color() { Hex = hex, Name = name };
+            return _colorStore.Update(color, id);
         }
 
         // DELETE api/colors/5

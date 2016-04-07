@@ -103,6 +103,21 @@ namespace CheatPads.Api.Entity
                     }
                 });
 
+                if (!db.Colors.Any())
+                {
+                    db.Colors.AddRange(
+                        new List<Color>()
+                        {
+                            new Color() { Name="White", Hex = "#FFFFFF" },
+                            new Color() { Name="Black", Hex = "#000000" },
+                            new Color() { Name="Gray", Hex = "#F0F0F0" },
+                            new Color() { Name="Red", Hex = "#FF0000" },
+                            new Color() { Name="Green", Hex = "#00FF00" },
+                            new Color() { Name="Blue", Hex = "#0000FF" },
+                            new Color() { Name="Purple", Hex = "#FF00FF" },
+                        }
+                    );
+                }
                 db.SaveChanges();
             }
         }

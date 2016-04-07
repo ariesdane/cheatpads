@@ -44,6 +44,7 @@ namespace CheatPads.Api
             services.AddScoped<Entity.Stores.ProductStore>();
             services.AddScoped<Entity.Stores.CategoryStore>();
             services.AddScoped<Entity.Stores.ColorStore>();
+            services.AddScoped<Entity.Stores.OrderStore>();
 
             // hosting          
             services.AddCors(x => {

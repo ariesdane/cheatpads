@@ -15,12 +15,12 @@ namespace CheatPads.Api.Entity.Stores
        
         public IQueryable<Product> ListByCategory(int categoryId)
         {
-            return dbSet.Where(x => x.CategoryId == categoryId);
+            return DbSet.Where(x => x.CategoryId == categoryId);
         }
 
         public IQueryable<Product> ListByCategory(string categoryName)
         {
-            return dbSet.Where(x => x.Category.Name == categoryName);
+            return DbSet.Where(x => x.Category.Name == categoryName);
         }
     }
 }

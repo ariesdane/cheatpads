@@ -7,7 +7,7 @@
         if (path.slice(-1) == "/") path = path.slice(0, -1);
         if (!/http/i.test(path)) path = (url || "") + "/" + path;
         if (id !== undefined) path += "/" + id;
-        return path;
+        return path + "?" + +new Date();
     }
 
     function _queryString (data) {
@@ -17,7 +17,7 @@
                 val = $.isArray(data[key]) ? data[key].join(",") : data[key];
                 parts.push(key + "=" + window.encodeURIComponent(val));
             }
-            return "?" + parts.join("&");
+            return "&" + parts.join("&");
         }
         return "";
     }

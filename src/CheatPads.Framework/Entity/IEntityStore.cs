@@ -10,11 +10,11 @@ namespace CheatPads.Framework.Entity
 
         T Get(params object[] key);
 
-        void Create(T entity);
+        T Create(T entity);
 
-        void Update(T entity, params object[] key);
+        bool Update(T entity, params object[] key);
 
-        void Delete(params object[] key);
+        bool Delete(params object[] key);
 
     }
 }

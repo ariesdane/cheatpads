@@ -10,7 +10,14 @@ namespace CheatPads.Api.Entity
     public class ApiDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             base.OnConfiguring(optionsBuilder);
@@ -21,11 +28,12 @@ namespace CheatPads.Api.Entity
 
             base.OnModelCreating(modelBuilder);
 
-            configureCommerceModel(modelBuilder);
+            configureProductModel(modelBuilder);
+            configureOrderModel(modelBuilder);
         }
 
 
-        private static void configureCommerceModel(ModelBuilder builder)
+        private static void configureProductModel(ModelBuilder builder)
         {
             builder.Entity<Category>(entity =>
             {
@@ -50,6 +58,58 @@ namespace CheatPads.Api.Entity
             });
         }
 
+        private static void configureOrderModel(ModelBuilder builder)
+        {
+            builder.Entity<Order>(entity =>
+            {
+                entity
+                    .ToTable("Order", "Sales")
+                    .HasKey(x => x.Id);
+
+                entity
+                    .Property(x => x.Id)
+                    .UseSqlServerIdentityColumn(); 
+
+                entity
+                    .HasMany<OrderItem>(x => x.Items)
+                    .WithOne(x => x.Order)
+                    .HasForeignKey(x => x.OrderId);           
+            });
+
+            builder.Entity<OrderItem>(entity =>
+            {
+                entity
+                    .ToTable("OrderItem", "Sales")
+                    .HasKey(x => x.Id);
+                    
+                entity
+                   .Property(x => x.Id)
+                   .UseSqlServerIdentityColumn();
+
+                //entity
+                //    .HasAlternateKey(x => new { x.OrderId, x.ProductSku, x.ColorId });
+                //    .ForSqlServerIsClustered();
+
+
+                entity
+                    .HasOne(x => x.Color)
+                    .WithMany(x => x.OrderItems)
+                    .HasForeignKey(x => x.ColorId);
+
+                entity
+                    .HasOne(x => x.Product)
+                    .WithMany(x => x.OrderItems)
+                    .HasForeignKey(x => x.ProductSku);
+            });
+
+            builder.Entity<Color>(entity =>
+            {
+                entity
+                    .ToTable("Color", "Sales")
+                    .HasKey(x => x.Id);
+
+            });
+        }
 
         public void EnsureDbExists()
         {

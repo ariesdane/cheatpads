@@ -8,8 +8,8 @@ namespace CheatPads.Framework.Entity
 
     public class GenericStore<TEntity> : IEntityStore<TEntity> where TEntity : class
     {
-        protected DbContext dbContext;
-        protected DbSet<TEntity> dbSet;
+        public DbContext DbContext;
+        public DbSet<TEntity> DbSet;
        
         /// <summary>
         /// Base constructor for initializing the DataStore class
@@ -18,8 +18,8 @@ namespace CheatPads.Framework.Entity
         /// <param name="dbSetName">The entity's dataset name within it's db context</param>
         public GenericStore(DbContext context)
         {
-            this.dbContext = context;
-            this.dbSet = context.Set<TEntity>();
+            this.DbContext = context;
+            this.DbSet = context.Set<TEntity>();
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace CheatPads.Framework.Entity
         /// <returns>True or False</returns>
         public virtual bool Exists(params object[] keys)
         {
-            return dbSet.Find(keys) != null;
+            return DbSet.Find(keys) != null;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace CheatPads.Framework.Entity
         /// <returns>TEntity</returns>
         public virtual TEntity Get(params object[] keys)
         {
-            return dbSet.Find<TEntity>(keys);
+            return DbSet.Find<TEntity>(keys);
         }
     
         /// <summary>
@@ -48,7 +48,7 @@ namespace CheatPads.Framework.Entity
         /// <returns>An IQueryable collection of TEntity</returns>
         public virtual IQueryable<TEntity> List()
         {
-            return dbSet.AsQueryable();
+            return DbSet.AsQueryable();
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace CheatPads.Framework.Entity
         /// </summary>
         /// <param name="entity">The entity to update</param>
         /// <returns>The updated entity</returns>
-        public virtual void Update(TEntity entity, params object[] key)
+        public virtual bool Update(TEntity entity, params object[] key)
         {
-            var dbEntity = dbSet.Find(key);
+            var dbEntity = DbSet.Find(key);
             if (dbEntity != null)
             {
                 dbEntity.SetValues(entity);
@@ -66,16 +66,20 @@ namespace CheatPads.Framework.Entity
             else {
                 Create(entity);
             }
+
+            return true;
         }
 
-        public virtual void Create(TEntity entity)
+        public virtual TEntity Create(TEntity entity)
         {        
             if (typeof(TEntity).Implements<IAuditRecord>())
             {
                 (entity as IAuditRecord).Created = DateTime.Now.ToUniversalTime();
                 (entity as IAuditRecord).Updated = DateTime.Now.ToUniversalTime();
             }
-            dbSet.Add(entity);
+            DbSet.Add(entity);
+            
+            return entity;
         }
 
        
@@ -84,14 +88,17 @@ namespace CheatPads.Framework.Entity
         /// </summary>
         /// <param name="keys">The entity's primary key components in column order</param>
         /// <returns>The deleted entity</returns>
-        public virtual void Delete(params object[] key)
+        public virtual bool Delete(params object[] key)
         {
-            var entity = dbSet.Find(key);
+            var entity = DbSet.Find(key);
 
             if (entity != null)
             {
-                dbSet.Remove(entity);
+                DbSet.Remove(entity);
+                return true;
             }
+
+            return false;
         }
 
     }
