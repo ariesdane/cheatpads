@@ -21,7 +21,7 @@
         if (model.filterBond()) query.Bond = model.filterBond();
         if (model.filterGroup()) query.Group = model.filterGroup();
 
-        return qlist(elements).where(query).$data;
+        return qlist(elements).where(query).result;
     });
 
     model.clearFilter = function () {

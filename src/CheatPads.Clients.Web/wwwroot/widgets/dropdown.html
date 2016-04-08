@@ -4,10 +4,10 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" data-bind="foreach: options">
-    <!--ko ifnot: $data === null -->
+    <!--ko ifnot: order=== null -->
         <li><a data-bind="text: $parent.getOptionText($data), click: $parent.select"></a></li>
     <!--/ko-->
-    <!--ko if: $data === null -->
+    <!--ko if: order=== null -->
         <li class="divider"></li>
     <!--/ko-->
     </ul>

@@ -134,12 +134,13 @@
 	    return _isFunction(predicate)
 			? predicate
 			: _isObject(predicate)
-				? function (item) {
+				? function (item, target) {
 				    for (var key in predicate) {
+				        var val = target ? target[key] : predicate[key];
 				        if (_isDate(item[key])) {
-				            if (+item[key] !== +predicate[key]) return false;
+				            if (+item[key] !== +val) return false;
 				        }
-				        else if (item[key] !== predicate[key]) return false;
+				        else if (item[key] !== val) return false;
 				    }
 				    return true;
 				}
@@ -347,6 +348,7 @@
 
 	        innerJoin: function (other, predicate, joinedObjectCreator) {
 	            other = _unwrap(other);
+	            predicate = _predicate(predicate);
 	            if (!_isArray(other)) {
 	                return this.clone();
 	            }
@@ -677,13 +679,13 @@
 	    };
 
 	    q.exists = q.any;
-	    q.$data = _;
 
 	    Object.defineProperties(q, {
-	        "length": {
-	            get: function () {
-	                return _.length;
-	            }
+	        length: {
+	            get: function () { return _.length; }
+	        },
+	        result: {
+	            get: function () { return _ || [];  }
 	        }
 	    });
 

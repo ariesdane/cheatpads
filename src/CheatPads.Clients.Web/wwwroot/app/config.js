@@ -24,6 +24,14 @@
         { hash: "#colors", title: 'Colors', path: 'pages/colors', icon: "flash" },
         { hash: "#admin/users", title: 'User Admin', path: 'pages/admin/users', icon: "cog" },
     ],
+    menus: {
+        siteNav: [
+            { hash: "#home" },
+            { hash: "#products" },
+            { hash: "#about" },
+            { hash: "#history" },
+        ]
+    },
     widgets: [
         { name: "dropdown", path: "widgets/dropdown" }
     ],
