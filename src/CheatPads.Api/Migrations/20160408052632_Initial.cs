@@ -45,11 +45,16 @@ namespace CheatPads.Api.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Created = table.Column<DateTime>(nullable: false),
-                    ProductCost = table.Column<double>(nullable: false),
+                    ExtendedCost = table.Column<double>(nullable: false),
+                    ItemCount = table.Column<int>(nullable: false),
+                    PaymentAccount = table.Column<string>(nullable: true),
+                    PaymentType = table.Column<int>(nullable: false),
                     ShippedOn = table.Column<DateTime>(nullable: false),
                     ShippingCost = table.Column<double>(nullable: false),
+                    ShippingMethod = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     Tax = table.Column<double>(nullable: false),
+                    TaxRate = table.Column<double>(nullable: false),
                     TotalCost = table.Column<double>(nullable: false),
                     TrackingNumber = table.Column<string>(nullable: true),
                     Updated = table.Column<DateTime>(nullable: false),
@@ -69,7 +74,7 @@ namespace CheatPads.Api.Migrations
                     CategoryId = table.Column<int>(nullable: false),
                     Details = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -93,6 +98,7 @@ namespace CheatPads.Api.Migrations
                     ColorId = table.Column<int>(nullable: false),
                     ExtendedCost = table.Column<double>(nullable: false),
                     OrderId = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     ProductSku = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false)
                 },

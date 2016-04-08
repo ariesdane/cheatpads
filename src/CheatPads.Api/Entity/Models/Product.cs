@@ -15,12 +15,11 @@ namespace CheatPads.Api.Entity.Models
 
         public int CategoryId { get; set; }
 
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         public string Image { get; set; }
 
         public virtual Category Category { get; set; }
 
-        public virtual List<OrderItem> OrderItems { get; set; }
     }
 }

@@ -11,6 +11,5 @@ namespace CheatPads.Api.Entity.Models
 
         public string Name { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; }
     }
 }

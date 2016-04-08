@@ -1,5 +1,49 @@
 ﻿<div class="cart-info">
-    <span class="badge" data-bind="text: cartCount"></span> &nbsp;
-    <i class="glyphicon glyphicon-shopping-cart"></i>
-    <span data-bind="text: cartTotal"></span>
+    <div>
+        <span class="badge" data-bind="text: cartCount"></span> &nbsp;
+        <i class="glyphicon glyphicon-shopping-cart"></i>
+        <a data-bind="click: toggleCartDetails">
+            <span data-bind="text: cartTotal"></span>
+            <span class="caret"></span>
+        </a>
+    </div>
+    <div class="cart-details" data-bind="visible: cartVisible">
+        <div class="panel text-left clearfix">
+            <div class="panel-heading">
+                <span class="panel-title">Cart Details</span>
+            </div>
+            <table class="table table-condensed" style="font-size: 14px">
+                <tbody data-bind="foreach: cartItems">
+                    <tr>
+                        <td>
+                            <select data-bind="value: quantity">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                                <option>15</option>
+                            </select>
+                        </td>
+                        <td data-bind="text: product.title"></td>
+                        <td class="text-right" data-bind="text: extendedCost"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="panel-footer text-right">
+                <button class="btn btn-success">
+                    <strong>Checkout</strong>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

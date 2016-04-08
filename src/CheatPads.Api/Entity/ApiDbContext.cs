@@ -93,12 +93,12 @@ namespace CheatPads.Api.Entity
 
                 entity
                     .HasOne(x => x.Color)
-                    .WithMany(x => x.OrderItems)
+                    .WithMany()
                     .HasForeignKey(x => x.ColorId);
 
                 entity
                     .HasOne(x => x.Product)
-                    .WithMany(x => x.OrderItems)
+                    .WithMany()
                     .HasForeignKey(x => x.ProductSku);
             });
 

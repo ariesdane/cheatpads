@@ -66,17 +66,17 @@ h1,h2,h3,h4,h5 {
     animation: fade-in 500ms;
 }
 
-a, .btn{
+a, .btn-default{
 	outline: none !important;
     cursor: pointer;
     color: #244a80;
 }
 
-a:hover, .btn:hover {
+a:hover, .btn-default:hover {
 	color: #14315a;
 }
 
-.btn {
+.btn-default {
     background: rgba(200, 200, 200, .1);
     border-color: #ddd;
 }
@@ -99,7 +99,7 @@ a:hover, .btn:hover {
     vertical-align: middle;
 }
 
-.btn:hover {
+.btn-default:hover {
     background: #eaeaea;
 }
 
@@ -170,6 +170,19 @@ em, .text-muted {
 
 .cart-info .glyphicon{
     font-size: 20px;
+}
+
+.cart-details {
+    position: absolute; 
+    z-index: 99;
+    width: 350px;
+    margin-left: -150px;
+    box-shadow: rgba(0,0,0,0.05) 3px 3px;
+    height: auto;
+}
+
+.cart-details > .panel {
+    margin: 0;
 }
 
 .cart-info .badge{

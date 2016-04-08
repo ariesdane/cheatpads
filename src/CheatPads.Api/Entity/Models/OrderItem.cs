@@ -15,6 +15,8 @@ namespace CheatPads.Api.Entity.Models
 
         public int ColorId { get; set; }
 
+        public double Price { get; set; }
+
         public int Quantity { get; set; }
 
         public double ExtendedCost { get; set; }

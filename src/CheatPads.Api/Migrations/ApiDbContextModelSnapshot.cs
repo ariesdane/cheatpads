@@ -54,15 +54,25 @@ namespace CheatPads.Api.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<double>("ProductCost");
+                    b.Property<double>("ExtendedCost");
+
+                    b.Property<int>("ItemCount");
+
+                    b.Property<string>("PaymentAccount");
+
+                    b.Property<int>("PaymentType");
 
                     b.Property<DateTime>("ShippedOn");
 
                     b.Property<double>("ShippingCost");
 
+                    b.Property<int>("ShippingMethod");
+
                     b.Property<int>("Status");
 
                     b.Property<double>("Tax");
+
+                    b.Property<double>("TaxRate");
 
                     b.Property<double>("TotalCost");
 
@@ -93,6 +103,8 @@ namespace CheatPads.Api.Migrations
 
                     b.Property<int>("OrderId");
 
+                    b.Property<double>("Price");
+
                     b.Property<string>("ProductSku");
 
                     b.Property<int>("Quantity");
@@ -114,7 +126,7 @@ namespace CheatPads.Api.Migrations
 
                     b.Property<string>("Image");
 
-                    b.Property<decimal>("Price");
+                    b.Property<double>("Price");
 
                     b.Property<string>("Title");
 

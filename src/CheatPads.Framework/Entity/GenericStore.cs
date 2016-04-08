@@ -48,7 +48,7 @@ namespace CheatPads.Framework.Entity
         /// <returns>An IQueryable collection of TEntity</returns>
         public virtual IQueryable<TEntity> List()
         {
-            return DbSet.AsQueryable();
+            return DbSet.AsNoTracking();
         }
 
         /// <summary>

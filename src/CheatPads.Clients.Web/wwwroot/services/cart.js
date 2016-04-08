@@ -1,39 +1,70 @@
-﻿define(["jquery", "ko", "./products", "./qlist"], function ($, ko, products, qlist) {
+﻿define(["jquery", "ko", "ajax", "storage", "./products"], function ($, ko, ajax, storage, products) {
     var model = {};
+    var order = ko.observable({});
 
-    model.taxRate = ko.observable(0.1);
-    model.items = ko.observableArray();
+    model.init = function () {
+        var id = storage.get("cartId");
+        if (id) {
+            ajax.ecomm.get("cart", id).as(order);
+        }
+        return model;
+    }
+
+
+    model.items = ko.pureComputed(function () {
+        return order().items;
+    });
 
     model.count = ko.computed(function () {
-        return model.items().length;
+        return order().itemCount;
     });
 
-    model.cost = ko.computed(function () {
-        var cost = 0;
-        model.items().forEach(function (item) {
-            cost += parseFloat(item.price);
-        });
-        return cost;
+    model.cost = ko.pureComputed(function () {
+        return round(order().extendedCost, 2);
+    })
+
+    model.tax = ko.pureComputed(function () {
+        return round(order().tax, 2);
     });
 
-    model.tax = ko.computed(function () {
-        return model.taxRate() * model.cost();
+    model.taxRate = ko.pureComputed(function () {
+        return round(order().taxRate * 100, 1);
     });
 
-    model.total = ko.computed(function () {
-        return "$" + round(model.cost() + model.tax(), 2);
+    model.total = ko.pureComputed(function () {
+        return round(order().totalCost, 2);
     });
 
     model.add = function (product) {
-        model.items.push(product);
+        var data = {
+            item: {
+                orderId: storage.get("cartId"),
+                productSku: product.sku,
+                colorId: 2,
+                quantity: 1
+            }
+        }
+
+        ajax.ecomm.post("cart/items", data).done(function (result) {
+            storage.set("cartId", result.id);
+            order(result);
+        });
     };
 
-    model.remove = function (product) {
-        qlist(model.items).remove(product);
+    model.remove = function (item) {
+        var id = storage.get("cartId");
+
+        ajax.ecomm.delete("cart/items", item.id).done(function (result) {
+            order(result);
+        });
     };
 
     model.clear = function () {
-        items.removeAll();
+        var id = storage.get("cartId");
+
+        ajax.ecomm.delete("cart", id).done(function (result) {
+            order({});
+        })
     };
 
 
@@ -42,5 +73,5 @@
         return s[0] + "." + (s[1] + '000000000000').substring(0, d || 2);
     }
 
-    return model;
+    return model.init();
 });

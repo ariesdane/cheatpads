@@ -14,7 +14,6 @@ namespace CheatPads.Api.Entity
         { 
             if (!db.Categories.Any())
             {
-
                 db.Categories.AddRange(new Category[] {
                     new Category()
                     {
@@ -27,7 +26,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Periodic Table",
                                 Details = "",
                                 Image = "assets/img/popular/periodic-1.png",
-                                Price = 14.99M
+                                Price = 14.99
                             },
                             new Product()
                             {
@@ -35,7 +34,7 @@ namespace CheatPads.Api.Entity
                                 Title = "8 Bit Mario",
                                 Details = "",
                                 Image = "assets/img/popular/mario-1.png",
-                                Price = 14.99M
+                                Price = 14.99
                             },
                             new Product()
                             {
@@ -43,7 +42,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Grumpy Cat",
                                 Details = "",
                                 Image = "assets/img/popular/grumpycat-1.png",
-                                Price = 11.99M
+                                Price = 11.99
                             },
                         }
                     },
@@ -57,7 +56,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Elsa",
                                 Details = "",
                                 Image = "assets/img/cartoon/frozen-1.png",
-                                Price = 14.99M
+                                Price = 14.99
                             },
                             new Product()
                             {
@@ -65,7 +64,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Lego Movie",
                                 Details = "",
                                 Image = "assets/img/cartoon/lego-1.png",
-                                Price = 13.99M
+                                Price = 13.99
                             },
                             new Product()
                             {
@@ -73,7 +72,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Rainbow Cat",
                                 Details = "",
                                 Image = "assets/img/cartoon/nyancat-1.png",
-                                Price = 14.99M
+                                Price = 14.99
                             },
                             new Product()
                             {
@@ -81,7 +80,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Scooby Doo",
                                 Details = "",
                                 Image = "assets/img/cartoon/scooby-1.png",
-                                Price = 12.99M
+                                Price = 12.99
                             },
                             new Product()
                             {
@@ -89,7 +88,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Shop Keepa",
                                 Details = "",
                                 Image = "assets/img/cartoon/shopkeepa-1.png",
-                                Price = 19.99M
+                                Price = 19.99
                             },
                             new Product()
                             {
@@ -97,7 +96,7 @@ namespace CheatPads.Api.Entity
                                 Title = "Snoopy",
                                 Details = "",
                                 Image = "assets/img/cartoon/snoopy-1.png",
-                                Price = 14.99M
+                                Price = 14.99
                             }
                         }
                     }
@@ -108,7 +107,6 @@ namespace CheatPads.Api.Entity
                     db.Colors.AddRange(
                         new List<Color>()
                         {
-                            new Color() { Name="White", Hex = "#FFFFFF" },
                             new Color() { Name="Black", Hex = "#000000" },
                             new Color() { Name="Gray", Hex = "#F0F0F0" },
                             new Color() { Name="Red", Hex = "#FF0000" },
