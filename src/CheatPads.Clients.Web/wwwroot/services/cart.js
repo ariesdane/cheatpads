@@ -16,7 +16,7 @@
     });
 
     model.count = ko.pureComputed(function () {
-        return (order().items || []).length;
+        return order().itemCount || 0;
     });
 
     model.cost = ko.pureComputed(function () {
