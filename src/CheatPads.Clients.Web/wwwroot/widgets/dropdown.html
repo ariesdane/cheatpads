@@ -1,13 +1,13 @@
-﻿<div class="dropdown" data-bind="css: { open: open, disabled: disabled }">
-    <button class="btn btn-default" data-bind="click: toggle, attr: { disabled: disabled }">
+﻿<div class="dropdown clearfix" data-bind="css: { open: open, disabled: disabled, init: init($element, $context) }">
+    <a class="btn" data-bind="click: toggle, attr: { disabled: disabled }">
         <span data-bind="text: label"></span> &nbsp;
         <span class="caret"></span>
-    </button>
+    </a>
     <ul class="dropdown-menu" data-bind="foreach: options">
-    <!--ko ifnot: order=== null -->
+    <!--ko ifnot: $data == null -->
         <li><a data-bind="text: $parent.getOptionText($data), click: $parent.select"></a></li>
     <!--/ko-->
-    <!--ko if: order=== null -->
+    <!--ko if: $data == null -->
         <li class="divider"></li>
     <!--/ko-->
     </ul>

@@ -89,7 +89,6 @@ a:hover, .btn-default:hover {
 }
 
 .btn-group > label {
-    float: left;
     margin: 0 20px 0 5px;
     text-transform: uppercase;
     font-weight: bold;
@@ -133,7 +132,7 @@ code {
     color: #244a80;
 }
 
-.panel .list-group > * {
+.panel .seek-group > * {
     border-bottom: none;
 }
 
@@ -183,6 +182,19 @@ em, .text-muted {
 
 .cart-details > .panel {
     margin: 0;
+}
+
+.cart-details table {
+    font-size: 14px;
+}
+
+.cart-empty {
+    padding: 15px;
+    font-size: 24pt;
+}
+
+.cart-empty > .glyphicon {
+    font-size: 24pt;
 }
 
 .cart-info .badge{

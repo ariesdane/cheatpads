@@ -64,23 +64,34 @@ namespace CheatPads.Api.Entity.Stores
                 }
                 else
                 {
-                    item.Product = DbContext.Set<Product>().FirstOrDefault(x => x.Sku == item.ProductSku);
-                    item.Price = item.Product.Price;
                     order.Items.Add(item);
-                }
-
-                item.ExtendedCost = item.Quantity * item.Price;
+                }               
             }
+
+            if(item.Product == null){
+                item.Product = DbContext.Set<Product>().FirstOrDefault(x => x.Sku == item.ProductSku);
+                item.Price = item.Product.Price;
+            }
+
+            item.ExtendedCost = item.Quantity * item.Price;
+
             return UpdateOrderCost(order);
         }
 
-        public OrderItem RemoveOrderItem(int itemId)
+        public Order RemoveOrderItem(int itemId)
         {
             OrderItem item = _itemStore.Get(itemId);
+            Order order = Get(item?.OrderId);
+
+            if(order != null)
+            {
+                item = order.Items.FirstOrDefault(x => x.Id == itemId);
+                order.Items.Remove(item);
+            }
 
             _itemStore.DbSet.Remove(item);
 
-            return item;
+            return UpdateOrderCost(order);
         }
 
 

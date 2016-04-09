@@ -12,7 +12,7 @@
             <div class="panel-heading">
                 <span class="panel-title">Cart Details</span>
             </div>
-            <table class="table table-condensed" style="font-size: 14px">
+            <table class="table table-condensed" data-bind="visible: !cartIsEmpty()" >
                 <tbody data-bind="foreach: cartItems">
                     <tr>
                         <td>
@@ -36,11 +36,22 @@
                         </td>
                         <td data-bind="text: product.title"></td>
                         <td class="text-right" data-bind="text: extendedCost"></td>
+                        <td class="text-right">
+                            <a data-bind="click: $parent.removeItem">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="panel-body text-center" data-bind="visible: cartIsEmpty">
+                <span class="cart-empty text-muted">
+                    <i class="glyphicon glyphicon-gift text-muted"></i>
+                    Empty
+                </span>
+            </div>
             <div class="panel-footer text-right">
-                <button class="btn btn-success">
+                <button class="btn btn-success" data-bind="attr: {disabled: cartIsEmpty }">
                     <strong>Checkout</strong>
                 </button>
             </div>

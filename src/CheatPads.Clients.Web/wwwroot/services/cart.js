@@ -12,11 +12,11 @@
 
 
     model.items = ko.pureComputed(function () {
-        return order().items;
+        return order().items || [];
     });
 
-    model.count = ko.computed(function () {
-        return order().itemCount;
+    model.count = ko.pureComputed(function () {
+        return (order().items || []).length;
     });
 
     model.cost = ko.pureComputed(function () {

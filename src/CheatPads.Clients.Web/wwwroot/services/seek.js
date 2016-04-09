@@ -1,6 +1,6 @@
 ﻿define(["ko"], function (ko) {
 
-    var arrayQuery;
+    var Seek;
 
 	_arrayElementCompare = function (element) {
 	    return function (other) {
@@ -97,8 +97,8 @@
 	    }
 	},
 
-	_minitabVariation = function (q, n) {
-	    return 1 / 4 * (q * n + q);
+	_minitabVariation = function (list, n) {
+	    return 1 / 4 * (list * n + list);
 	},
 
 	_multiply = function (runningTotal, value) {
@@ -208,15 +208,15 @@
 	},
 
 	_wrap = function (array) {
-	    return _isObject(array) && array._ ? array : new arrayQuery(array);
+	    return _isObject(array) && array._ ? array : new Seek(array);
 	};
 
-	arrayQuery = function(array) {
+	Seek = function(array) {
 	    var _ = typeof array === "string"
             ? JSON.parse(array)
             : ko.unwrap(array) || [];
 
-	    var q = {
+	    var seek = {
 	        $data: {
 	            get: function () { return _; }
 	        },
@@ -305,7 +305,7 @@
 
 	            while (i < _.length) {
 	                thisElement = _[i++];
-	                arrayQuery.prototype.push.apply(
+	                Seek.prototype.push.apply(
                         flattened, _isArray(thisElement) ?
 	                    thisElement :
                         [thisElement]
@@ -574,11 +574,11 @@
 	        },
 
 	        selectMany: function (selector) {
-	            var list = this.select(selector),
+	            var seek = this.select(selector),
                     results = [];
 
-	            if (list && list.count()) {
-	                list.each(function (entries) {
+	            if (seek && seek.count()) {
+	                seek.each(function (entries) {
 	                    results = results.concat(entries || []);
 	                });
 	            }
@@ -678,9 +678,9 @@
 	        }
 	    };
 
-	    q.exists = q.any;
+	    seek.exists = seek.any;
 
-	    Object.defineProperties(q, {
+	    Object.defineProperties(seek, {
 	        length: {
 	            get: function () { return _.length; }
 	        },
@@ -689,8 +689,8 @@
 	        }
 	    });
 
-	    return q;
+	    return seek;
 	}
 
-	return arrayQuery;
+	return Seek;
 });

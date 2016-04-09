@@ -40,5 +40,9 @@
         widget.toggle = function () {
             widget.open(!widget.open());
         }
+
+        widget.init = function (element, context) {
+ 
+        }
     }
 });

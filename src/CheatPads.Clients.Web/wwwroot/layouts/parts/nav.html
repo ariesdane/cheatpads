@@ -1,5 +1,6 @@
-﻿<div class="navbar navbar-default">
-    <ul class="nav navbar-nav" data-bind="foreach: menuItems">
+﻿<nav class="navbar navbar-default">
+
+    <ul class="nav navbar-nav" data-bind="foreach: siteMenuItems">
         <li data-bind="css: { active: $parent.currentHash() == hash }">
             <a data-bind="attr: { href: hash }">
                 <i data-bind="attr: { class: 'glyphicon glyphicon-' + icon }"></i>
@@ -7,4 +8,8 @@
             </a>
         </li>
     </ul>
-</div>
+    <div class="nav navbar-nav navbar-form navbar-right">
+        <dropdown params="{label: 'Options', options: testMenuItems, select: testMenuSelect }"></dropdown>
+    </div>
+
+</nav>

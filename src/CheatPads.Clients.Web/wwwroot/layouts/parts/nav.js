@@ -1,13 +1,16 @@
-﻿define(["system", "auth", "config", "jquery", "ko", "services/qlist"], function (system, auth, config, $, ko, qlist) {
+﻿define(["system", "auth", "config", "jquery", "ko", "services/seek"], function (system, auth, config, $, ko, seek) {
 
-    var navItems =
-        qlist(config.menus.siteNav)
+    function getMenuItems(name) {
+        return seek(config.menus[name])
             .innerJoin(config.routes, { hash: "hash" }, function (a, b) {
                 return $.extend({}, b, a);
             }).result;
+    }
 
     return {
-        menuItems: navItems,
+        testMenuVisible: ko.observable(false),
+        siteMenuItems: getMenuItems("site"),
+        testMenuItems: getMenuItems("test"),
         currentHash: ko.computed(function () {
             var route = system.currentRoute();
             return route ? route.hash : config.startPage;
@@ -16,6 +19,9 @@
             return auth.authenticated()
                 ? "Welcome, " + auth.identity().userName
                 : "Browsing as Guest";
-        })
+        }),
+        testMenuSelect: function (item) {
+            location.href = item.hash;
+        }
     };
 });

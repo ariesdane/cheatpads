@@ -32,23 +32,6 @@ namespace CheatPads.Api.Controllers
             return _orderStore.Get(id);
         }
 
-        // POST api/cart
-        [HttpPost]
-        public Order Post(Order order)
-        {
-            order = _orderStore.Create(order);
-            _orderStore.DbContext.SaveChanges();
-
-            return order;
-        }
-
-        // DELETE api/cart/5
-        [HttpDelete("{id}")]
-        public bool Delete(int id)
-        {
-            return _orderStore.Delete(id);
-        }
-
         // POST api/cart/items
         [HttpPost("items")]
         public Order AddItem(int id, OrderItem item)
@@ -60,16 +43,14 @@ namespace CheatPads.Api.Controllers
         }
 
         // DELETE api/cart/items/104
-        [HttpDelete("items")]
+        [HttpDelete("items/{id}")]
         public Order RemoveItem(int id)
         {
-            OrderItem item = _orderStore.RemoveOrderItem(id);
+            Order order = _orderStore.RemoveOrderItem(id);
             _orderStore.DbContext.SaveChanges();
 
-            return _orderStore.Get(item.OrderId);
+            return order;
         }
-
-
 
     }
 

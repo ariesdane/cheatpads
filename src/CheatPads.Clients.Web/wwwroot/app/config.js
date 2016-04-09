@@ -25,11 +25,16 @@
         { hash: "#admin/users", title: 'User Admin', path: 'pages/admin/users', icon: "cog" },
     ],
     menus: {
-        siteNav: [
+        site: [
             { hash: "#home" },
             { hash: "#products" },
             { hash: "#about" },
             { hash: "#history" },
+        ],
+        test: [
+            { hash: "#test" },
+            { hash: "#colors" },
+            { hash: "#admin/users"}
         ]
     },
     widgets: [
